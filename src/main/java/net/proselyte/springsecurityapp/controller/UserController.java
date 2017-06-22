@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Controller for {@link net.proselyte.springsecurityapp.model.User}'s pages.
  *
@@ -83,9 +85,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model){
-        model.addAttribute("books", bookService.findAll());
-        model.addAttribute("users", userService.findAll());
+    public String admin(Model model,  @RequestParam(value = "usersPage", required=false) Integer usersPage,  @RequestParam(value = "booksPage", required=false) Integer booksPage) {
+        if (usersPage == null) {
+            usersPage = 1;
+        }
+
+        if (booksPage == null) {
+            booksPage = 1;
+        }
+
+        List<Book> books = bookService.findAllByOrderByNameAsc(booksPage - 1, 5);
+        model.addAttribute("books", books);
+
+        List<User> users = userService.findAllByOrderByIdAsc(usersPage - 1, 5);
+        model.addAttribute("users", users);
+
+        model.addAttribute("booksPageContr", new PageController(bookService.count() / 5 + (bookService.count() % 5 > 0 ? 1 : 0), booksPage));
+        model.addAttribute("usersPageContr", new PageController(userService.count() / 5 + (userService.count() % 5 > 0 ? 1 : 0), usersPage));
         return "admin";
     }
 

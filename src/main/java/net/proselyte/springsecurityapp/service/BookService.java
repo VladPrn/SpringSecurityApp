@@ -11,4 +11,6 @@ public interface BookService {
     List<Book> findAll();
 
     List<Book> findAllByOrderByNameAsc(int page, int size);
+
+    long count();
 }

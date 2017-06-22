@@ -28,4 +28,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAllByOrderByNameAsc(int page, int size) {
         return bookDao.findAllByOrderByNameAsc(new PageRequest(page, size));
     }
+
+    @Override
+    public long count() {
+        return bookDao.count();
+    }
 }
