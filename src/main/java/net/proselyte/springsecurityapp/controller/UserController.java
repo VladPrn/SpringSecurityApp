@@ -86,12 +86,20 @@ public class UserController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model,  @RequestParam(value = "usersPage", required=false) Integer usersPage,  @RequestParam(value = "booksPage", required=false) Integer booksPage) {
+        boolean notFull = false;
+
         if (usersPage == null) {
             usersPage = 1;
+            notFull = true;
         }
 
         if (booksPage == null) {
             booksPage = 1;
+            notFull = true;
+        }
+
+        if (notFull) {
+            return "redirect:/admin?booksPage=" + booksPage + "&usersPage=" + usersPage;
         }
 
         List<Book> books = bookService.findAllByOrderByNameAsc(booksPage - 1, 5);
