@@ -113,6 +113,9 @@ public class UserController {
 
         int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
         int booksCountPages = booksCount / 5 + (booksCount % 5 > 0 ? 1 : 0);
+        if (booksCountPages < 1) {
+            booksCountPages = 1;
+        }
         if (booksPage < 1) {
             booksPage = 1;
         }
