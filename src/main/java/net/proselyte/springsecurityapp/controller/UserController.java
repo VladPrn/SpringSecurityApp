@@ -80,7 +80,7 @@ public class UserController {
         if (page == null) {
             page = 0;
         }
-        model.addAttribute("books", bookService.findAllByOrderByNameAsc(page, 2));
+        model.addAttribute("books", bookService.findAllByOrderByNameAsc(page, 10));
         return "welcome";
     }
 
