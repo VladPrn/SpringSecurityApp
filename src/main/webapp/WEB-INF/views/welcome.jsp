@@ -15,7 +15,6 @@
     <title>Simbir Library</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
 
 </head>
@@ -28,8 +27,21 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
-        <a href="${contextPath}/userpage">Личный кабинет</a>
+        <h2>
+            Привет ${pageContext.request.userPrincipal.name} |
+            <a href="${contextPath}/personal">Личный кабинет</a> |
+            <c:if test="${pageContext.request.userPrincipal.name == 'proselyte'}">
+                <a href="${contextPath}/admin">Администрирование</a> |
+            </c:if>
+            <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
+        </h2>
+    </c:if>
+
+    <c:if test="${pageContext.request.userPrincipal.name == null}">
+        <h2>
+            Привет Гость |
+            <a href="${contextPath}/login">Войти</a>
+        </h2>
     </c:if>
 
     <h2>Книги</h2>

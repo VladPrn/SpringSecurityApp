@@ -80,7 +80,7 @@ public class UserController {
         if (page == null) {
             page = 0;
         }
-        model.addAttribute("books", bookService.findAllByOrderByNameAsc(page, 2));
+        model.addAttribute("books", bookService.findAllByOrderByNameAsc(page, 10));
         return "welcome";
     }
 
@@ -113,6 +113,9 @@ public class UserController {
 
         int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
         int booksCountPages = booksCount / 5 + (booksCount % 5 > 0 ? 1 : 0);
+        if (booksCountPages < 1) {
+            booksCountPages = 1;
+        }
         if (booksPage < 1) {
             booksPage = 1;
         }
@@ -192,6 +195,12 @@ public class UserController {
 
         model.addAttribute("log", str.toString());
         return "testdb";
+    }
+
+    @RequestMapping(value = "/personal", method = RequestMethod.GET)
+    public String personal(Model model){
+        model.addAttribute("books", bookService.findAll());
+        return "personal";
     }
 
     @RequestMapping(value = "/userpage", method = RequestMethod.GET)

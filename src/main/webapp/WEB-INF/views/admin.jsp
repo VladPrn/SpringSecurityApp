@@ -38,9 +38,10 @@
         </div>
         <div class="col-md-6">
             <div class="input-group h2">
-                <form action="/admin" class="form-inline" method="GET">
+                <form action="/admin" class="form-inline" method="GET" onsubmit="this.booksSearch.value = encodeURI(this.tempField.value)">
                     <div class="form-group">
-                        <input name="booksSearch" class="form-control" id="search" type="text" placeholder="Введите название книги" value="${param.booksSearch}">
+                        <input name="booksSearch" type="hidden">
+                        <input name="tempField" class="form-control" id="search" type="text" placeholder="Введите название книги" value="${param.booksSearch}">
                     </div>
                     <button class="btn btn-primary" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
