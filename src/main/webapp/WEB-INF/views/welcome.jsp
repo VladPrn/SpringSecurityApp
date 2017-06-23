@@ -15,39 +15,54 @@
     <title>Simbir Library</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+
+
 </head>
 <body>
 
-
-<div class="container-fluid">
+<div class="container">
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h2>
+        <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
         <a href="${contextPath}/userpage">Личный кабинет</a>
     </c:if>
 
-    <h4>Книги</h4>
-    <h6>Page ${param.page + 1}</h6>
-    <table class="table">
-        <tr>
-            <td>Порядковый номер</td>
-            <td>Название</td>
-            <td>Описание</td>
-            <td>Дата добавления</td>
-        </tr>
-        <c:forEach var="book" items="${books}" varStatus="loop">
+    <h2>Книги</h2>
+
+    <div class="container-fluid" style="padding-top: 10px">
+        <div class="row">
+            <c:forEach var="book" items="${books}" varStatus="loop">
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                    <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
+                         style="padding-bottom: 15px">
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+
+
+    <%--    <table class="table">
             <tr>
-                <td>${loop.index + 1}</td>
-                <td>${book.name}</td>
-                <td>${book.description}</td>
-                <td>${book.date}</td>
+                <td>Порядковый номер</td>
+                <td>Название</td>
+                <td>Описание</td>
+                <td>Дата добавления</td>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach var="book" items="${books}" varStatus="loop">
+                <tr>
+                    <td>${loop.index + 1}</td>
+                    <td>${book.name}</td>
+                    <td>${book.description}</td>
+                    <td>${book.date}</td>
+                </tr>
+            </c:forEach>
+        </table>--%>
+
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
