@@ -28,9 +28,8 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2>Привет ${pageContext.request.userPrincipal.name} | <a
-                onclick="document.forms['logoutForm'].submit()">Выйти</a>
-        </h2>
+        <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
+        <a href="${contextPath}/userpage">Личный кабинет</a>
     </c:if>
 
     <h2>Книги</h2>

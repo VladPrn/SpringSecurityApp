@@ -34,15 +34,18 @@
 <div id="main" class="container">
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Книги</h2>
+            <h2 name="books">Книги</h2>
         </div>
         <div class="col-md-6">
             <div class="input-group h2">
-                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Введите название книги">
-                <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
+                <form action="/admin" class="form-inline" method="GET">
+                    <div class="form-group">
+                        <input name="booksSearch" class="form-control" id="search" type="text" placeholder="Введите название книги" value="${param.booksSearch}">
+                    </div>
+                    <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
             </span>
             </div>
         </div>
@@ -65,7 +68,7 @@
 
                 <c:forEach var="book" items="${books}" varStatus="loop">
                     <tr>
-                        <td>${loop.index + 1}</td>
+                        <td>${(param.booksPage - 1) * 5 + loop.index + 1}</td>
                         <td>${book.name}</td>
                         <td>${book.description}</td>
                         <td>${book.date}</td>
@@ -83,17 +86,32 @@
         <div class="col-md-12">
 
             <ul class="pagination">
-                <li class="disabled"><a>&lt; Назад</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Вперед &gt;</a></li>
+                <c:if test="${param.booksPage != 1}">
+                    <li><a href="?booksPage=${param.booksPage - 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">&lt; Назад</a></li>
+                </c:if>
+                <c:if test="${param.booksPage == 1}">
+                    <li li class="disabled"><a>&lt; Назад</a></li>
+                </c:if>
+                <c:forEach var="curr" items="${booksPageContr.pages}">
+                    <c:if test="${param.booksPage != curr}">
+                        <li><a href="?booksPage=${curr}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">${curr}</a></li>
+                    </c:if>
+                    <c:if test="${param.booksPage == curr}">
+                        <li li class="disabled"><a>${curr}</a></li>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${param.booksPage != booksPageContr.countPages}">
+                    <li><a href="?booksPage=${param.booksPage + 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">Вперед &gt;</a></li>
+                </c:if>
+                <c:if test="${param.booksPage == booksPageContr.countPages}">
+                    <li li class="disabled"><a>Вперед &gt;</a></li>
+                </c:if>
             </ul><!-- /.pagination -->
 
         </div>
     </div> <!-- /#bottom -->
     <div class="col-md-3">
-        <h2>Пользователи</h2>
+        <h2 name="users">Пользователи</h2>
     </div>
     <div id="users" class="row">
         <div class="table-responsive col-md-12">
@@ -106,7 +124,7 @@
                 <tbody>
                 <c:forEach var="user" items="${users}" varStatus="loop">
                     <tr>
-                        <td>${loop.index + 1}</td>
+                        <td>${(param.usersPage - 1) * 5 + loop.index + 1}</td>
                         <td>${user.username}</td>
                         <td class="actions"><a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Блокировать</a></td>
                     </tr>
@@ -119,11 +137,26 @@
         <div class="col-md-12">
 
             <ul class="pagination">
-                <li class="disabled"><a>&lt; Назад</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Вперед &gt;</a></li>
+                <c:if test="${param.usersPage != 1}">
+                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage - 1}&booksSearch=${param.booksSearch}#users">&lt; Назад</a></li>
+                </c:if>
+                <c:if test="${param.usersPage == 1}">
+                    <li li class="disabled"><a>&lt; Назад</a></li>
+                </c:if>
+                <c:forEach var="curr" items="${usersPageContr.pages}">
+                    <c:if test="${param.usersPage != curr}">
+                        <li><a href="?booksPage=${param.booksPage}&usersPage=${curr}&booksSearch=${param.booksSearch}#users">${curr}</a></li>
+                    </c:if>
+                    <c:if test="${param.usersPage == curr}">
+                        <li li class="disabled"><a>${curr}</a></li>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${param.usersPage != usersPageContr.countPages}">
+                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage + 1}&booksSearch=${param.booksSearch}#users">Вперед &gt;</a></li>
+                </c:if>
+                <c:if test="${param.usersPage == usersPageContr.countPages}">
+                    <li li class="disabled"><a>Вперед &gt;</a></li>
+                </c:if>
             </ul><!-- /.pagination -->
 
         </div>

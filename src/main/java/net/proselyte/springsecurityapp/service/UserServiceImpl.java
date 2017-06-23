@@ -5,6 +5,7 @@ import net.proselyte.springsecurityapp.dao.UserDao;
 import net.proselyte.springsecurityapp.model.Role;
 import net.proselyte.springsecurityapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userDao.findAll();
+    }
+
+    @Override
+    public List<User> findAllByOrderByIdAsc(int page, int size) {
+        return userDao.findAllByOrderByIdAsc(new PageRequest(page, size));
+    }
+
+    @Override
+    public long count() {
+        return userDao.count();
     }
 }
