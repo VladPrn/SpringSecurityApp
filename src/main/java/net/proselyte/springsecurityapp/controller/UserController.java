@@ -85,7 +85,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model,  @RequestParam(value = "usersPage", required=false) Integer usersPage,  @RequestParam(value = "booksPage", required=false) Integer booksPage) {
+    public String admin(Model model,
+                        @RequestParam(value = "usersPage", required=false) Integer usersPage,
+                        @RequestParam(value = "booksPage", required=false) Integer booksPage,
+                        @RequestParam(value = "booksSearch", required=false) String booksSearch) {
+
         boolean notFull = false;
 
         if (usersPage == null) {
@@ -98,18 +102,39 @@ public class UserController {
             notFull = true;
         }
 
-        if (notFull) {
-            return "redirect:/admin?booksPage=" + booksPage + "&usersPage=" + usersPage;
+        if (booksSearch == null) {
+            booksSearch = "";
+            notFull = true;
         }
 
-        List<Book> books = bookService.findAllByOrderByNameAsc(booksPage - 1, 5);
+        if (notFull) {
+            return "redirect:/admin?booksPage=" + booksPage + "&usersPage=" + usersPage + "&booksSearch=" + booksSearch;
+        }
+
+        int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
+        int booksCountPages = booksCount / 5 + (booksCount % 5 > 0 ? 1 : 0);
+        if (booksPage < 1) {
+            booksPage = 1;
+        }
+        if (booksPage > booksCountPages) {
+            booksPage = booksCountPages;
+        }
+        List<Book> books = bookService.findByNameContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 5);
         model.addAttribute("books", books);
 
+        int usersCount = (int) userService.count();
+        int usersCountPages = usersCount / 5 + (usersCount % 5 > 0 ? 1 : 0);
+        if (usersPage < 1) {
+            usersPage = 1;
+        }
+        if (usersPage > usersCountPages) {
+            usersPage = usersCountPages;
+        }
         List<User> users = userService.findAllByOrderByIdAsc(usersPage - 1, 5);
         model.addAttribute("users", users);
 
-        model.addAttribute("booksPageContr", new PageController(bookService.count() / 5 + (bookService.count() % 5 > 0 ? 1 : 0), booksPage));
-        model.addAttribute("usersPageContr", new PageController(userService.count() / 5 + (userService.count() % 5 > 0 ? 1 : 0), usersPage));
+        model.addAttribute("booksPageContr", new PageController(booksCountPages, booksPage));
+        model.addAttribute("usersPageContr", new PageController(usersCountPages, usersPage));
         return "admin";
     }
 
