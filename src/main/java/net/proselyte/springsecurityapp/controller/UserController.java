@@ -194,9 +194,9 @@ public class UserController {
         return "testdb";
     }
 
-    @RequestMapping(value = "/userpage", method = RequestMethod.GET)
-    public String userpage(Model model){
+    @RequestMapping(value = "/personal", method = RequestMethod.GET)
+    public String personal(Model model){
         model.addAttribute("books", bookService.findAll());
-        return "userpage";
+        return "personal";
     }
 }

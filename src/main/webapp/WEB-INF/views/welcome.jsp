@@ -29,7 +29,7 @@
         </form>
 
         <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
-        <a href="${contextPath}/userpage">Личный кабинет</a>
+        <a href="${contextPath}/personal">Личный кабинет</a>
     </c:if>
 
     <h2>Книги</h2>
