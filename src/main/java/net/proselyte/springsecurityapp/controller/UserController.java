@@ -168,4 +168,10 @@ public class UserController {
         model.addAttribute("log", str.toString());
         return "testdb";
     }
+
+    @RequestMapping(value = "/userpage", method = RequestMethod.GET)
+    public String userpage(Model model){
+        model.addAttribute("books", bookService.findAll());
+        return "userpage";
+    }
 }

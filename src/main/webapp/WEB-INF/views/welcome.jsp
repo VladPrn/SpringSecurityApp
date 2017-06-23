@@ -27,6 +27,7 @@
         </form>
 
         <h2>Привет ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h2>
+        <a href="${contextPath}/userpage">Личный кабинет</a>
     </c:if>
 
     <h4>Книги</h4>
