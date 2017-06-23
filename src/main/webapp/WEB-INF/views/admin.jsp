@@ -38,11 +38,14 @@
         </div>
         <div class="col-md-6">
             <div class="input-group h2">
-                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Введите название книги">
-                <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
+                <form action="/admin" class="form-inline" method="GET">
+                    <div class="form-group">
+                        <input name="booksSearch" class="form-control" id="search" type="text" placeholder="Введите название книги" value="${param.booksSearch}">
+                    </div>
+                    <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
             </span>
             </div>
         </div>
@@ -84,21 +87,21 @@
 
             <ul class="pagination">
                 <c:if test="${param.booksPage != 1}">
-                    <li><a href="?booksPage=${param.booksPage - 1}&usersPage=${param.usersPage}#books">&lt; Назад</a></li>
+                    <li><a href="?booksPage=${param.booksPage - 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">&lt; Назад</a></li>
                 </c:if>
                 <c:if test="${param.booksPage == 1}">
                     <li li class="disabled"><a>&lt; Назад</a></li>
                 </c:if>
                 <c:forEach var="curr" items="${booksPageContr.pages}">
                     <c:if test="${param.booksPage != curr}">
-                        <li><a href="?booksPage=${curr}&usersPage=${param.usersPage}#books">${curr}</a></li>
+                        <li><a href="?booksPage=${curr}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">${curr}</a></li>
                     </c:if>
                     <c:if test="${param.booksPage == curr}">
                         <li li class="disabled"><a>${curr}</a></li>
                     </c:if>
                 </c:forEach>
                 <c:if test="${param.booksPage != booksPageContr.countPages}">
-                    <li><a href="?booksPage=${param.booksPage + 1}&usersPage=${param.usersPage}#books">Вперед &gt;</a></li>
+                    <li><a href="?booksPage=${param.booksPage + 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">Вперед &gt;</a></li>
                 </c:if>
                 <c:if test="${param.booksPage == booksPageContr.countPages}">
                     <li li class="disabled"><a>Вперед &gt;</a></li>
@@ -135,21 +138,21 @@
 
             <ul class="pagination">
                 <c:if test="${param.usersPage != 1}">
-                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage - 1}#users">&lt; Назад</a></li>
+                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage - 1}&booksSearch=${param.booksSearch}#users">&lt; Назад</a></li>
                 </c:if>
                 <c:if test="${param.usersPage == 1}">
                     <li li class="disabled"><a>&lt; Назад</a></li>
                 </c:if>
                 <c:forEach var="curr" items="${usersPageContr.pages}">
                     <c:if test="${param.usersPage != curr}">
-                        <li><a href="?booksPage=${param.booksPage}&usersPage=${curr}#users">${curr}</a></li>
+                        <li><a href="?booksPage=${param.booksPage}&usersPage=${curr}&booksSearch=${param.booksSearch}#users">${curr}</a></li>
                     </c:if>
                     <c:if test="${param.usersPage == curr}">
                         <li li class="disabled"><a>${curr}</a></li>
                     </c:if>
                 </c:forEach>
                 <c:if test="${param.usersPage != usersPageContr.countPages}">
-                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage + 1}#users">Вперед &gt;</a></li>
+                    <li><a href="?booksPage=${param.booksPage}&usersPage=${param.usersPage + 1}&booksSearch=${param.booksSearch}#users">Вперед &gt;</a></li>
                 </c:if>
                 <c:if test="${param.usersPage == usersPageContr.countPages}">
                     <li li class="disabled"><a>Вперед &gt;</a></li>
