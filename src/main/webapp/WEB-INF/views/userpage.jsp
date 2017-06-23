@@ -35,57 +35,24 @@
         </header>
 
 
-        <h1>Личный кабинет пользователя ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h1>
+        <h3>Пользователь ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h3>
 
 
 
         <div class="row">
             <div class="col-xs-6">
                 <div class="plate">
-                    <h3>Личная информация</h3>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="login">Логин</label>
-                            <input type="text" class="form-control" name="login" id="login" value="${pageContext.request.userPrincipal.name}">
-                        </div>
-                        <div class="form-group">
-                            <label for="mail">E-mail</label>
-                            <input type="text" class="form-control" name="login" id="mail" value="">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-info">Редактировать</button>
-                        </div>
-                    </form>
+                    <p>Логин - ${pageContext.request.userPrincipal.name}</p>
+                    <p>E-mail - ${pageContext.request.userPrincipal.name}</p>
                 </div>
                 <div class="plate">
-                    <h3>Смена пароля</h3>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="password">Пароль</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirm-password">Повторите пароль</label>
-                            <input type="password" class="form-control" name="confirm_password" id="confirm-password">
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-info">Сменить пароль</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="plate">
-                    <h3>Мои книги</h3>
+                    <h3>Книги пользователя</h3>
                     <table class="table table-striped">
                         <tr>
                             <th>№</th>
                             <th>Название</th>
                             <th>Описание</th>
                             <th>Дата</th>
-                            <th></th>
                         </tr>
                         <c:forEach var="book" items="${books}" varStatus="loop">
                             <tr>
@@ -93,9 +60,6 @@
                                 <td>${book.name}</td>
                                 <td>${book.description}</td>
                                 <td>здеся будет дата</td>
-                                <td class="actions">
-                                    <a class="btn btn-info btn-xs" href="#">Вернуть</a>
-                                </td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -106,6 +70,7 @@
     </c:if>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
