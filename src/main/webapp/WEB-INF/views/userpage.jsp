@@ -45,6 +45,8 @@
                     <p>Логин - ${pageContext.request.userPrincipal.name}</p>
                     <p>E-mail - ${pageContext.request.userPrincipal.name}</p>
                 </div>
+            </div>
+            <div class="col-xs-6">
                 <div class="plate">
                     <h3>Книги пользователя</h3>
                     <table class="table table-striped">
