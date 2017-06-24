@@ -94,7 +94,12 @@
                                 <td>${book.description}</td>
                                 <td>${book.date}</td>
                                 <td class="actions">
-                                    <a class="btn btn-info btn-xs" href="#">Вернуть</a>
+                                    <form action="/personal?removeBookId=${book.id}" class="form-inline" method="POST">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <button class="btn btn-info btn-xs" type="submit">
+                                            Вернуть
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>

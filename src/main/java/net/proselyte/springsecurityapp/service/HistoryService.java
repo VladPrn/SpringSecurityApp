@@ -7,4 +7,6 @@ import java.util.List;
 public interface HistoryService {
 
     List<History> findAll();
+
+    void save(History hist);
 }

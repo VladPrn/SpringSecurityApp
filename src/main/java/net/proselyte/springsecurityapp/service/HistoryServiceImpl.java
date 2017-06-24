@@ -17,4 +17,9 @@ public class HistoryServiceImpl implements HistoryService {
     public List<History> findAll() {
         return historyDao.findAll();
     }
+
+    @Override
+    public void save(History hist) {
+        historyDao.save(hist);
+    }
 }

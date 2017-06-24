@@ -9,11 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -204,19 +202,35 @@ public class UserController {
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(Model model){
-        UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = userService.findByUsername(tempUser.getUsername());
-        Long userId = currentUser.getId();
-
-        List<Book> books = userBookBalanceService.findActiveBooks(userId);
+        List<Book> books = userBookBalanceService.findActiveBooks(getUserId());
 
         model.addAttribute("books", books);
         return "personal";
+    }
+
+    @RequestMapping(value = "/personal", method = RequestMethod.POST)
+    public String personal(@RequestParam(value = "removeBookId", required=false) Long removeBookId) {
+        if (removeBookId != null) {
+            History item = new History();
+            item.setUser_id(getUserId());
+            item.setBook_id(removeBookId);
+            item.setAction_type(1l);
+            item.setDate(new Date(System.currentTimeMillis()));
+
+            historyService.save(item);
+        }
+        return "redirect:/personal";
     }
 
     @RequestMapping(value = "/userpage", method = RequestMethod.GET)
     public String userpage(Model model){
         model.addAttribute("books", bookService.findAll());
         return "userpage";
+    }
+
+    private Long getUserId() {
+        UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userService.findByUsername(tempUser.getUsername());
+        return currentUser.getId();
     }
 }
