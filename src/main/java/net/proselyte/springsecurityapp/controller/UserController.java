@@ -204,12 +204,17 @@ public class UserController {
     public String personal(Model model){
         List<Book> books = userBookBalanceService.findActiveBooks(getUserId());
 
+        model.addAttribute("userForm", new User());
         model.addAttribute("books", books);
         return "personal";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
-    public String personal(@RequestParam(value = "removeBookId", required=false) Long removeBookId) {
+    public String personal(Model model,
+                           @RequestParam(value = "removeBookId", required=false) Long removeBookId,
+                           @ModelAttribute("userForm") User userForm,
+                           BindingResult bindingResult) {
+
         if (removeBookId != null) {
             History item = new History();
             item.setUser_id(getUserId());
@@ -218,6 +223,15 @@ public class UserController {
             item.setDate(new Date(System.currentTimeMillis()));
 
             historyService.save(item);
+        }
+        if (userForm.getPassword() != null) {
+            userForm.setUsername("simpleusername");
+            userValidator.validate(userForm, bindingResult);
+            if (bindingResult.hasErrors()) {
+                List<Book> books = userBookBalanceService.findActiveBooks(getUserId());
+                model.addAttribute("books", books);
+                return "personal";
+            }
         }
         return "redirect:/personal";
     }
