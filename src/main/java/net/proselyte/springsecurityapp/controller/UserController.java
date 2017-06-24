@@ -52,7 +52,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+        userValidator.validate(userForm, bindingResult, true);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -202,7 +202,7 @@ public class UserController {
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(Model model){
-        List<Book> books = userBookBalanceService.findActiveBooks(getUserId());
+        List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
 
         model.addAttribute("userForm", new User());
         model.addAttribute("books", books);
@@ -217,22 +217,27 @@ public class UserController {
 
         if (removeBookId != null) {
             History item = new History();
-            item.setUser_id(getUserId());
+            item.setUser_id(getCurrentUser().getId());
             item.setBook_id(removeBookId);
             item.setAction_type(1l);
             item.setDate(new Date(System.currentTimeMillis()));
 
             historyService.save(item);
         }
+
         if (userForm.getPassword() != null) {
-            userForm.setUsername("simpleusername");
-            userValidator.validate(userForm, bindingResult);
+            userValidator.validate(userForm, bindingResult, false);
             if (bindingResult.hasErrors()) {
-                List<Book> books = userBookBalanceService.findActiveBooks(getUserId());
+                List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
                 model.addAttribute("books", books);
                 return "personal";
             }
+            User user = getCurrentUser();
+            userForm.setId(user.getId());
+            userForm.setUsername(user.getUsername());
+            userService.save(userForm);
         }
+
         return "redirect:/personal";
     }
 
@@ -242,9 +247,9 @@ public class UserController {
         return "userpage";
     }
 
-    private Long getUserId() {
+    private User getCurrentUser() {
         UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userService.findByUsername(tempUser.getUsername());
-        return currentUser.getId();
+        return currentUser;
     }
 }
