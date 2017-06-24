@@ -1,6 +1,7 @@
 <%@ page import="net.proselyte.springsecurityapp.model.Book" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -63,21 +64,28 @@
                 </div>
                 <div class="plate">
                     <h3>Смена пароля</h3>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="password">Пароль</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
+                    <form:form method="POST" modelAttribute="userForm" class="form-signin">
+                        <spring:bind path="password">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="password" class="form-control" placeholder="Пароль"></form:input>
+                                <form:errors path="password"></form:errors>
+                            </div>
+                        </spring:bind>
+
+                        <spring:bind path="confirmPassword">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="confirmPassword" class="form-control"
+                                            placeholder="Подтвердите пароль"></form:input>
+                                <form:errors path="confirmPassword"></form:errors>
+                            </div>
+                        </spring:bind>
 
                         <div class="form-group">
-                            <label for="confirm-password">Повторите пароль</label>
-                            <input type="password" class="form-control" name="confirm_password" id="confirm-password">
+                            <button class="btn btn-info" type="submit">Сменить пароль</button>
                         </div>
 
-                        <div class="form-group">
-                            <button class="btn btn-info">Сменить пароль</button>
-                        </div>
-                    </form>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form:form>
                 </div>
             </div>
             <div class="col-md-6">
