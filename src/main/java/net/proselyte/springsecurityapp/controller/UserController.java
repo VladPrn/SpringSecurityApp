@@ -4,6 +4,8 @@ import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,9 @@ public class UserController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private UserBookBalaceService userBookBalanceService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -199,7 +204,13 @@ public class UserController {
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(Model model){
-        model.addAttribute("books", bookService.findAll());
+        UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userService.findByUsername(tempUser.getUsername());
+        Long userId = currentUser.getId();
+
+        List<Book> books = userBookBalanceService.findActiveBooks(userId);
+
+        model.addAttribute("books", books);
         return "personal";
     }
 

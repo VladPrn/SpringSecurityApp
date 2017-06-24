@@ -92,7 +92,7 @@
                                 <td>${loop.index + 1}</td>
                                 <td>${book.name}</td>
                                 <td>${book.description}</td>
-                                <td>здеся будет дата</td>
+                                <td>${book.date}</td>
                                 <td class="actions">
                                     <a class="btn btn-info btn-xs" href="#">Вернуть</a>
                                 </td>

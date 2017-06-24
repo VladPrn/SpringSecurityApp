@@ -9,6 +9,8 @@ import java.util.List;
 public interface BookDao extends JpaRepository<Book, Long> {
     Book findByName(String name);
 
+    Book findById(Long id);
+
     List<Book> findAllByOrderByNameAsc(Pageable pr);
 
     List<Book> findByNameContainingIgnoreCaseOrderByNameAsc(String str, Pageable pr);
