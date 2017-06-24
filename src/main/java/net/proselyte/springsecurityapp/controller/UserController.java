@@ -228,6 +228,11 @@ public class UserController {
         return "userpage";
     }
 
+    @RequestMapping(value = "/bookpage", method = RequestMethod.GET)
+    public String bookpage(Model model){
+        return "bookpage";
+    }
+
     private Long getUserId() {
         UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userService.findByUsername(tempUser.getUsername());

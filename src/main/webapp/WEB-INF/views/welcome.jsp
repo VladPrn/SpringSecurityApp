@@ -49,10 +49,10 @@
     <div class="container-fluid" style="padding-top: 10px">
         <div class="row">
             <c:forEach var="book" items="${books}" varStatus="loop">
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a class="col-xs-6 col-sm-4 col-md-3 col-lg-3" href="/bookpage">
                     <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
                          style="padding-bottom: 15px">
-                </div>
+                </a>
             </c:forEach>
         </div>
     </div>

@@ -40,13 +40,16 @@
 
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-md-6">
                 <div class="plate">
-                    <p>Логин - ${pageContext.request.userPrincipal.name}</p>
-                    <p>E-mail - ${pageContext.request.userPrincipal.name}</p>
+                    <p>
+                        <b>Логин:</b> ${pageContext.request.userPrincipal.name}<br>
+                        <b>E-mail:</b> <span style="color:red">//TODO выввести email</span><br>
+                        <b>Описание:</b> <span style="color:red">//TODO выввести description</span>
+                    </p>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-md-6">
                 <div class="plate">
                     <h3>Книги пользователя</h3>
                     <table class="table table-striped">

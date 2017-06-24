@@ -40,17 +40,21 @@
 
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-md-6">
                 <div class="plate">
                     <h3>Личная информация</h3>
                     <form action="">
                         <div class="form-group">
-                            <label for="login">Логин</label>
+                            <label for="login">Логин</label>${System.out.println(pageContext.request.userPrincipal)}
                             <input type="text" class="form-control" name="login" id="login" value="${pageContext.request.userPrincipal.name}">
                         </div>
                         <div class="form-group">
-                            <label for="mail">E-mail</label>
-                            <input type="text" class="form-control" name="login" id="mail" value="">
+                            <label for="email">E-mail</label>
+                            <input type="text" class="form-control" name="email" id="email" value="//TODO выввести email">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Описание</label>
+                            <textarea class="form-control no-resize" rows="7" name="description" id="description">//TODO выввести description</textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-info">Редактировать</button>
@@ -76,7 +80,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-md-6">
                 <div class="plate">
                     <h3>Мои книги</h3>
                     <table class="table table-striped">

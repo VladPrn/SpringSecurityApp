@@ -10,6 +10,7 @@
     <http auto-config="true">
         <intercept-url pattern="/"/>
         <intercept-url pattern="/welcome"/>
+        <intercept-url pattern="/bookpage"/>
         <intercept-url pattern="/userpage"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/personal" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>

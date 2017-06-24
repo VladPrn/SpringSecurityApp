@@ -10,8 +10,10 @@ DROP TABLE  IF EXISTS books;
 CREATE TABLE users (
   id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  picture VARCHAR(100)
+  picture VARCHAR(100),
+  description VARCHAR(255)
 )
   ENGINE = InnoDB;
 
@@ -82,47 +84,47 @@ CREATE VIEW users_books_balance AS
 
 -- Insert data
 
-INSERT INTO users VALUES (1, 'proselyte', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (2, 'username1', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (3, 'username2', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (4, 'username3', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (5, 'username4', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (6, 'username5', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (7, 'username6', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (8, 'username7', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (9, 'username8', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (10, 'username9', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (11, 'username10', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (12, 'username11', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (13, 'username12', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (14, 'username13', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (15, 'username14', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (16, 'username15', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (17, 'username16', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (18, 'username17', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (19, 'username18', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (20, 'username19', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (21, 'username20', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (22, 'username21', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (23, 'username22', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (24, 'username23', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (25, 'username24', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (26, 'username25', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (27, 'username26', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (28, 'username27', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (29, 'username28', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (30, 'username29', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (31, 'username30', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (32, 'username31', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (33, 'username32', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (34, 'username33', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (35, 'username34', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (36, 'username35', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (37, 'username36', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (38, 'username37', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (39, 'username38', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (40, 'username39', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
-INSERT INTO users VALUES (41, 'username40', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href');
+INSERT INTO users VALUES (1, 'proselyte', 'my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (2, 'username1', '1my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (3, 'username2', '2my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (4, 'username3', '3my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (5, 'username4', '4my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (6, 'username5', '5my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (7, 'username6', '6my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (8, 'username7', '7my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (9, 'username8', '8my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (10, 'username9', '9my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (11, 'username10', '10my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (12, 'username11', '11my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (13, 'username12', '12my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (14, 'username13', '13my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (15, 'username14', '14my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (16, 'username15', '15my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (17, 'username16', '16my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (18, 'username17', '17my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (19, 'username18', '18my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (20, 'username19', '19my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (21, 'username20', '20my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (22, 'username21', '21my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (23, 'username22', '22my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (24, 'username23', '23my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (25, 'username24', '24my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (26, 'username25', '25my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (27, 'username26', '26my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (28, 'username27', '27my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (29, 'username28', '28my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (30, 'username29', '29my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (31, 'username30', '30my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (32, 'username31', '31my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (33, 'username32', '32my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (34, 'username33', '33my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (35, 'username34', '34my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (36, 'username35', '35my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (37, 'username36', '36my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (38, 'username37', '37my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (39, 'username38', '38my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (40, 'username39', '39my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
+INSERT INTO users VALUES (41, 'username40', '40my.world@mail.com', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG', 'href', 'Я люблю кушать пельмешки');
 
 INSERT INTO roles VALUES (1, 'ROLE_USER');
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN');

@@ -4,3 +4,15 @@
     border-radius: 4px;
     margin-bottom: 20px;
 }
+
+textarea.form-control {
+    max-width: 100%;
+}
+
+.no-resize {
+    resize: none;
+}
+
+.book-picture {
+    max-width: 100%;
+}
