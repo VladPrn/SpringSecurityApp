@@ -37,10 +37,33 @@
             <div class="col-md-8">
                 <p><b>Описание:</b>${book.description}</p>
                 <c:if test="${book.owner != null}">
-                    <p><b>Сейчас находится у пользователя:</b> <a href="/userpage?userId=${book.owner.id}">${book.owner.username}</a></p>
+                    <c:if test="${pageContext.request.userPrincipal.name != book.owner.username}">
+                        <p>
+                            <b>Сейчас находится у пользователя:</b>
+                            <a href="/userpage?userId=${book.owner.id}">${book.owner.username}</a>
+                        </p>
+                    </c:if>
+                    <c:if test="${pageContext.request.userPrincipal.name == book.owner.username}">
+                        <p>
+                            <b>Сейчас данная книга находится у вас:</b>
+                        </p>
+                        <form action="/personal?removeBookId=${book.id}" class="form-inline" method="POST">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <button class="btn btn-info" type="submit">Вернуть книгу</button>
+                        </form>
+                    </c:if>
                 </c:if>
                 <c:if test="${book.owner == null}">
-                    <button class="btn btn-info">Взять книгу</button>
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <form action="?addBookId=${book.id}" class="form-inline" method="POST">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <button class="btn btn-info" type="submit">Взять книгу</button>
+                        </form>
+                    </c:if>
+                    <c:if test="${pageContext.request.userPrincipal.name == null}">
+                        <p><b>Для получения книги необходимо выполнить:</b></p>
+                        <a class="btn btn-info" href="login">Вход</a>
+                    </c:if>
                 </c:if>
             </div>
         </div>

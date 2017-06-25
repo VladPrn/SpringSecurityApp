@@ -22,57 +22,47 @@
 
 <div class="container">
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
+    <header>
+        <div class="page-header">
+            <h1>Типо шапка</h1>
+        </div>
+    </header>
 
 
-        <header>
-            <div class="page-header">
-                <h1>Типо шапка</h1>
-            </div>
-        </header>
+    <h3>Пользователь ${user.username}</h3>
 
-
-        <h3>Пользователь ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h3>
-
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="plate">
-                    <p>
-                        <b>Логин:</b> ${pageContext.request.userPrincipal.name}<br>
-                        <b>E-mail:</b> <span style="color:red">//TODO выввести email</span><br>
-                        <b>Описание:</b> <span style="color:red">//TODO выввести description</span>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="plate">
-                    <h3>Книги пользователя</h3>
-                    <table class="table table-striped">
-                        <tr>
-                            <th>№</th>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Дата</th>
-                        </tr>
-                        <c:forEach var="book" items="${books}" varStatus="loop">
-                            <tr>
-                                <td>${loop.index + 1}</td>
-                                <td>${book.name}</td>
-                                <td>${book.description}</td>
-                                <td>здеся будет дата</td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="plate">
+                <p>
+                    <b>Логин:</b> ${user.username}<br>
+                    <b>E-mail:</b> <span style="color:red">${user.email}</span><br>
+                    <b>Описание:</b> <span style="color:red">${user.description}</span>
+                </p>
             </div>
         </div>
-
-    </c:if>
+        <div class="col-md-6">
+            <div class="plate">
+                <h3>Книги пользователя</h3>
+                <table class="table table-striped">
+                    <tr>
+                        <th>№</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Дата</th>
+                    </tr>
+                    <c:forEach var="book" items="${books}" varStatus="loop">
+                        <tr>
+                            <td>${loop.index + 1}</td>
+                            <td>${book.name}</td>
+                            <td>${book.description}</td>
+                            <td>${book.date}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </div>
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>

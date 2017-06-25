@@ -108,9 +108,7 @@
                                 <td class="actions">
                                     <form action="/personal?removeBookId=${book.id}" class="form-inline" method="POST">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button class="btn btn-info btn-xs" type="submit">
-                                            Вернуть
-                                        </button>
+                                        <button class="btn btn-info btn-xs" type="submit">Вернуть</button>
                                     </form>
                                 </td>
                             </tr>

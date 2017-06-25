@@ -247,8 +247,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userpage", method = RequestMethod.GET)
-    public String userpage(Model model){
-        model.addAttribute("books", bookService.findAll());
+    public String userpage(Model model,
+                           @RequestParam(value = "userId", required=true) Long userId){
+
+        model.addAttribute("user", userService.findById(userId));
+        model.addAttribute("books", userBookBalanceService.findActiveBooks(userId));
         return "userpage";
     }
 
@@ -262,6 +265,21 @@ public class UserController {
         model.addAttribute("book", extendBook);
         return "bookpage";
     }
+
+    @RequestMapping(value = "/bookpage", method = RequestMethod.POST)
+    public String addBook(Model model,
+                           @RequestParam(value = "addBookId", required=true) Long addBookId) {
+
+        History item = new History();
+        item.setUser_id(getCurrentUser().getId());
+        item.setBook_id(addBookId);
+        item.setAction_type(-1l);
+        item.setDate(new Date(System.currentTimeMillis()));
+        historyService.save(item);
+
+        return "redirect:/personal";
+    }
+
 
     private User getCurrentUser() {
         UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
