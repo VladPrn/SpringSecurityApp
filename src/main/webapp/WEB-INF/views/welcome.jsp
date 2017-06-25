@@ -50,7 +50,6 @@
             </c:forEach>
         </div>
     </div>
-
     <div class="container-fluid" style="text-align: center">
         <ul class="pagination" style="display: inline-block">
             <c:if test="${param.booksPage != 1}">
