@@ -71,3 +71,7 @@ body {
 .has-error {
     color: red
 }
+
+.navbar-brand {
+    padding-top: 10px;
+}
