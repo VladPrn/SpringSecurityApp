@@ -22,19 +22,20 @@ public class UserValidator {
     @Autowired
     private UserService userService;
 
-    public void validate(Object o, Errors errors, int type) {
+    public void validate(Object o, Errors errors, User current, int type) {
         User user = (User) o;
+
+        if (type == CHANGE_PERSONAL) {
+            if (userService.findByUsername(user.getUsername()) != null && !current.getUsername().equals(user.getUsername())) {
+                errors.rejectValue("username", "Duplicate.userForm.username");
+            }
+        }
 
         if (type == REGISTRATION || type == CHANGE_PERSONAL) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
             if (user.getUsername().length() < 8 || user.getUsername().length() > 32) {
                 errors.rejectValue("username", "Size.userForm.username");
             }
-
-            if (userService.findByUsername(user.getUsername()) != null) {
-                errors.rejectValue("username", "Duplicate.userForm.username");
-            }
-
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
             if (userService.findByUsername(user.getEmail()) != null) {

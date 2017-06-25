@@ -53,7 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult, UserValidator.REGISTRATION);
+        userValidator.validate(userForm, bindingResult, null, UserValidator.REGISTRATION);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -238,7 +238,10 @@ public class UserController {
     public String personal(Model model){
         List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
 
-        model.addAttribute("userForm1", getCurrentUser());
+        User current = getCurrentUser();
+        current.setUsername(null);
+
+        model.addAttribute("userForm1", current);
         model.addAttribute("userForm2", new User());
         model.addAttribute("books", books);
         return "personal";
@@ -262,8 +265,21 @@ public class UserController {
             historyService.save(item);
         }
 
+        if (userForm1.getUsername() != null) {
+            userValidator.validate(userForm1, bindingResult, getCurrentUser(), UserValidator.CHANGE_PERSONAL);
+            if (bindingResult.hasErrors()) {
+                List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
+                model.addAttribute("books", books);
+                return "personal";
+            }
+            User user = getCurrentUser();
+            userForm1.setId(user.getId());
+            userForm1.setPassword(user.getPassword());
+            userService.save(userForm1);
+        }
+
         if (userForm2.getPassword() != null) {
-            userValidator.validate(userForm2, bindingResult, UserValidator.CHANGEE_PASSWORD);
+            userValidator.validate(userForm2, bindingResult, getCurrentUser(), UserValidator.CHANGEE_PASSWORD);
             if (bindingResult.hasErrors()) {
                 List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
                 model.addAttribute("books", books);
