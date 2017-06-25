@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<div class="container" >
+<div class="container">
 <br>
     <form method="POST" action="${contextPath}/login" class="form-signin">
         <h2 class="form-heading">Авторизация</h2>
