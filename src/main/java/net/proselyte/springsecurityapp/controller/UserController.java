@@ -80,15 +80,44 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model, @RequestParam(value = "page", required=false) Integer page) {
-        if (page == null) {
-            page = 0;
+    public String welcome(Model model,
+                          @RequestParam(value = "booksPage", required=false) Integer booksPage,
+                          @RequestParam(value = "booksSearch", required=false) String booksSearch) {
+
+        boolean notFull = false;
+
+        if (booksPage == null) {
+            booksPage = 1;
+            notFull = true;
         }
 
-        List<Book> books = bookService.findAllByOrderByNameAsc(page, 10);
+        if (booksSearch == null) {
+            booksSearch = "";
+            notFull = true;
+        }
+
+        if (notFull) {
+            return "redirect:/?booksPage=" + booksPage + "&booksSearch=" + booksSearch;
+        }
+
+        int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
+        int booksCountPages = booksCount / 12 + (booksCount % 12 > 0 ? 1 : 0);
+        if (booksCountPages < 1) {
+            booksCountPages = 1;
+        }
+        if (booksPage < 1) {
+            booksPage = 1;
+        }
+        if (booksPage > booksCountPages) {
+            booksPage = booksCountPages;
+        }
+
+        List<Book> books = bookService.findByNameContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 12);
         List<ExtendBook> extendBooks = getExtendBooks(books);
+        model.addAttribute("books", extendBooks);
 
         model.addAttribute("books", extendBooks);
+        model.addAttribute("booksPageContr", new PageController(booksCountPages, booksPage));
         return "welcome";
     }
 

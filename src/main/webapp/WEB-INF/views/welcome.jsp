@@ -90,15 +90,26 @@
 
     <div class="container-fluid" style="text-align: center">
         <ul class="pagination" style="display: inline-block">
-            <li><a href="">&lt; Назад</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><a href="">6</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="">Вперед &gt;</a></li>
+            <c:if test="${param.booksPage != 1}">
+                <li><a href="?booksPage=${param.booksPage - 1}&booksSearch=${param.booksSearch}">&lt; Назад</a></li>
+            </c:if>
+            <c:if test="${param.booksPage == 1}">
+                <li li class="disabled"><a>&lt; Назад</a></li>
+            </c:if>
+            <c:forEach var="curr" items="${booksPageContr.pages}">
+                <c:if test="${param.booksPage != curr}">
+                    <li><a href="?booksPage=${curr}&booksSearch=${param.booksSearch}">${curr}</a></li>
+                </c:if>
+                <c:if test="${param.booksPage == curr}">
+                    <li li class="disabled"><a>${curr}</a></li>
+                </c:if>
+            </c:forEach>
+            <c:if test="${param.booksPage != booksPageContr.countPages}">
+                <li><a href="?booksPage=${param.booksPage + 1}&booksSearch=${param.booksSearch}">Вперед &gt;</a></li>
+            </c:if>
+            <c:if test="${param.booksPage == booksPageContr.countPages}">
+                <li li class="disabled"><a>Вперед &gt;</a></li>
+            </c:if>
         </ul>
     </div>
 
