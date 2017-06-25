@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"> <img class="img-responsive2" src="${contextPath}/resources/images/logo.png" width="149"></a>
+            <a class="navbar-brand" href="/welcome"> <img class="img-responsive2" src="${contextPath}/resources/images/logo.png" width="149"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-ex1-collapse">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
