@@ -17,6 +17,8 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    User findByEmail(String username);
+
     List<User> findAll();
 
     List<User> findAllByOrderByIdAsc(int page, int size);

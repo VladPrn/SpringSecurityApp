@@ -53,7 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult, true);
+        userValidator.validate(userForm, bindingResult, UserValidator.REGISTRATION);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -238,7 +238,8 @@ public class UserController {
     public String personal(Model model){
         List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
 
-        model.addAttribute("userForm", new User());
+        model.addAttribute("userForm1", getCurrentUser());
+        model.addAttribute("userForm2", new User());
         model.addAttribute("books", books);
         return "personal";
     }
@@ -247,8 +248,10 @@ public class UserController {
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
     public String personal(Model model,
                            @RequestParam(value = "removeBookId", required=false) Long removeBookId,
-                           @ModelAttribute("userForm") User userForm,
+                           @ModelAttribute("userForm1") User userForm1,
+                           @ModelAttribute("userForm2") User userForm2,
                            BindingResult bindingResult) {
+
         if (removeBookId != null) {
             History item = new History();
             item.setUser_id(getCurrentUser().getId());
@@ -259,17 +262,18 @@ public class UserController {
             historyService.save(item);
         }
 
-        if (userForm.getPassword() != null) {
-            userValidator.validate(userForm, bindingResult, false);
+        if (userForm2.getPassword() != null) {
+            userValidator.validate(userForm2, bindingResult, UserValidator.CHANGEE_PASSWORD);
             if (bindingResult.hasErrors()) {
                 List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
                 model.addAttribute("books", books);
                 return "personal";
             }
             User user = getCurrentUser();
-            userForm.setId(user.getId());
-            userForm.setUsername(user.getUsername());
-            userService.save(userForm);
+            userForm2.setId(user.getId());
+            userForm2.setEmail(user.getEmail());
+            userForm2.setUsername(user.getUsername());
+            userService.save(userForm2);
         }
 
         return "redirect:/personal";
