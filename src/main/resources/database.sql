@@ -171,7 +171,7 @@ INSERT INTO user_roles VALUES (39, 1);
 INSERT INTO user_roles VALUES (40, 1);
 INSERT INTO user_roles VALUES (41, 1);
 
-INSERT INTO books VALUES (1, 'Big book', 'About Spring', 'href', '2012-12-12');
+INSERT INTO books VALUES (1, 'A) Книга Г. Остер "Вредные советы"', ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'href', '2012-12-12');
 INSERT INTO books VALUES (2, 'Small book', 'About JQuery', 'href', '2015-12-12');
 INSERT INTO books VALUES (3, 'Русская книга', 'Русская книга с кирилицей', 'href', '2017-12-12');
 INSERT INTO books VALUES (3, 'Simple book1', 'About book', 'href', '2017-12-12');

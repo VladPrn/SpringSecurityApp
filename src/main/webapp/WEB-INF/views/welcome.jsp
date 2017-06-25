@@ -49,9 +49,15 @@
     <div class="container-fluid" style="padding-top: 10px">
         <div class="row">
             <c:forEach var="book" items="${books}" varStatus="loop">
-                <a class="col-xs-6 col-sm-4 col-md-3 col-lg-3" href="/bookpage">
-                    <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
-                         style="padding-bottom: 15px">
+                <a class="col-xs-6 col-sm-4 col-md-3 col-lg-3" href="/bookpage?bookId=${book.id}">
+                    <c:if test="${book.owner == null}">
+                        <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
+                             style="padding-bottom: 15px">
+                    </c:if>
+                    <c:if test="${book.owner != null}">
+                        <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
+                             style="padding-bottom: 15px; opacity: 0.5">
+                    </c:if>
                 </a>
             </c:forEach>
         </div>

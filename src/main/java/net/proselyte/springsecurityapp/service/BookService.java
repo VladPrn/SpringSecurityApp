@@ -8,6 +8,8 @@ public interface BookService {
 
     Book findByName(String name);
 
+    Book findById(Long id);
+
     List<Book> findAll();
 
     List<Book> findAllByOrderByNameAsc(int page, int size);

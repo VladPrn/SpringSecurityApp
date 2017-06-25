@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -83,7 +84,11 @@ public class UserController {
         if (page == null) {
             page = 0;
         }
-        model.addAttribute("books", bookService.findAllByOrderByNameAsc(page, 10));
+
+        List<Book> books = bookService.findAllByOrderByNameAsc(page, 10);
+        List<ExtendBook> extendBooks = getExtendBooks(books);
+
+        model.addAttribute("books", extendBooks);
         return "welcome";
     }
 
@@ -209,12 +214,12 @@ public class UserController {
         return "personal";
     }
 
+
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
     public String personal(Model model,
                            @RequestParam(value = "removeBookId", required=false) Long removeBookId,
                            @ModelAttribute("userForm") User userForm,
                            BindingResult bindingResult) {
-
         if (removeBookId != null) {
             History item = new History();
             item.setUser_id(getCurrentUser().getId());
@@ -248,7 +253,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/bookpage", method = RequestMethod.GET)
-    public String bookpage(Model model){
+    public String bookpage(Model model,
+                           @RequestParam(value = "bookId", required=true) Long bookId) {
+
+        Book book = bookService.findById(bookId);
+        ExtendBook extendBook = getExtendBook(book);
+
+        model.addAttribute("book", extendBook);
         return "bookpage";
     }
 
@@ -256,5 +267,22 @@ public class UserController {
         UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userService.findByUsername(tempUser.getUsername());
         return currentUser;
+    }
+
+    private List<ExtendBook> getExtendBooks(List<Book> books) {
+        List<ExtendBook> extendBooks = new ArrayList<>();
+        for (Book book : books) {
+            extendBooks.add(getExtendBook(book));
+        }
+        return extendBooks;
+    }
+
+    private ExtendBook getExtendBook(Book book) {
+        ExtendBook extendBook = new ExtendBook(book);
+        UserBookBalance ubb = userBookBalanceService.findFirstByBookIdOrderByIdDesc(book.getId());
+        if (ubb != null && ubb.getBalance() == -1) {
+            extendBook.setOwner(userService.findById(ubb.getUserId()));
+        }
+        return extendBook;
     }
 }

@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface UserBookBalaceService {
 
-    List<UserBookBalance> findActive(Long userId);
-
-    List<UserBookBalance> findNotActive(Long userId);
+    UserBookBalance findFirstByBookIdOrderByIdDesc(Long bookId);
 
     List<Book> findActiveBooks(Long userId);
 }

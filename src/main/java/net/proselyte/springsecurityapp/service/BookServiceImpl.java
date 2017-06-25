@@ -20,6 +20,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findById(Long id) {
+        return bookDao.findById(id);
+    }
+
+    @Override
     public List<Book> findAll() {
         return bookDao.findAll();
     }

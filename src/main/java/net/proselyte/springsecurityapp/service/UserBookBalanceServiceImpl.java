@@ -21,13 +21,8 @@ public class UserBookBalanceServiceImpl implements UserBookBalaceService {
     private BookDao bookDao;
 
     @Override
-    public List<UserBookBalance> findActive(Long userId) {
-        return balanceDao.findAll();
-    }
-
-    @Override
-    public List<UserBookBalance> findNotActive(Long userId) {
-        return balanceDao.findAll();
+    public UserBookBalance findFirstByBookIdOrderByIdDesc(Long bookId) {
+        return balanceDao.findFirstByBookIdOrderByIdDesc(bookId);
     }
 
     @Override
