@@ -88,6 +88,20 @@
         </div>
     </div>
 
+    <div class="container-fluid" style="text-align: center">
+        <ul class="pagination" style="display: inline-block">
+            <li><a href="">&lt; Назад</a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li><a href="">6</a></li>
+            <li><a href="">7</a></li>
+            <li><a href="">Вперед &gt;</a></li>
+        </ul>
+    </div>
+
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
