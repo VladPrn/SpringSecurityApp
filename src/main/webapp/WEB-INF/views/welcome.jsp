@@ -6,48 +6,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Simbir Library</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
-
-
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
-
 <div class="container">
-
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-
-        <h2>
-            Привет ${pageContext.request.userPrincipal.name} |
-            <a href="${contextPath}/personal">Личный кабинет</a> |
-            <c:if test="${pageContext.request.userPrincipal.name == 'proselyte'}">
-                <a href="${contextPath}/admin">Администрирование</a> |
-            </c:if>
-            <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
-        </h2>
-    </c:if>
-
-    <c:if test="${pageContext.request.userPrincipal.name == null}">
-        <div class="container">
-            <h2>
-                Привет Гость |
-                <a href="${contextPath}/login">Войти</a>
-            </h2>
-        </div>
-    </c:if>
-
-
     <div class="container-fluid">
         <div class="col-md-3 pull-left">
             <h2>Книги</h2>

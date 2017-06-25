@@ -6,31 +6,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-    <title>Админка</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 
 <body>
-<div class="сontainer">
-    <div class="col-md-12">
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-    <form id="logoutForm" method="post" action="${contextPath}/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-    <h2>Страница Админа - ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
-    </h2>
-    </c:if>
-        </div>
-</div>
-
 <div id="main" class="container">
     <div id="top" class="row">
         <div class="col-md-3">

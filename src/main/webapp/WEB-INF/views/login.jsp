@@ -7,37 +7,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Авторизация</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 
 <body>
-<%--<div class="navbar navbar-default navbar-static-top" role="navigation">--%>
-    <%--<div class="container">--%>
-        <%--<div class="navbar-header">--%>
-            <%--<a class="navbar-brand" href="#">Библиотека SimbirSoft</a>--%>
-        <%--</div>--%>
-        <%--<div class="navbar-collapse collapse">--%>
-            <%--<ul class="nav navbar-nav navbar-right">--%>
-                <%--<li><a href="../navbar/">Вход</a></li>--%>
-            <%--</ul>--%>
-        <%--</div><!--/.nav-collapse -->--%>
-    <%--</div>--%>
-<%--</div>--%>
-<div class="container">
-
+<div class="container" >
+    <div class="plate">
+<br>
     <form method="POST" action="${contextPath}/login" class="form-signin">
         <h2 class="form-heading">Авторизация</h2>
 
@@ -54,7 +30,6 @@
         </div>
 
     </form>
-
 </div>
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

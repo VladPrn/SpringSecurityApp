@@ -8,38 +8,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Simbir Library</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
-
 <div class="container">
-
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-
-
-        <header>
-            <div class="page-header">
-                <h1>Типо шапка</h1>
-            </div>
-        </header>
-
-
-        <h1>Личный кабинет пользователя ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a></h1>
-
-
-
         <div class="row">
             <div class="col-md-6">
                 <div class="plate">
@@ -117,9 +89,6 @@
                 </div>
             </div>
         </div>
-
-    </c:if>
-
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
