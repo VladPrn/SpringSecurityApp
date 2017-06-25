@@ -15,6 +15,7 @@
     <title>Simbir Library</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 
 
 </head>
@@ -38,48 +39,54 @@
     </c:if>
 
     <c:if test="${pageContext.request.userPrincipal.name == null}">
-        <h2>
-            Привет Гость |
-            <a href="${contextPath}/login">Войти</a>
-        </h2>
+        <div class="container">
+            <h2>
+                Привет Гость |
+                <a href="${contextPath}/login">Войти</a>
+            </h2>
+        </div>
     </c:if>
 
-    <h2>Книги</h2>
 
-    <div class="container-fluid" style="padding-top: 10px">
+    <div class="container-fluid">
+        <div class="col-md-3 pull-left">
+            <h2>Книги</h2>
+        </div>
+        <div class="col-md-3 input-group h2 pull-right">
+            <%--форма поиска окно+кнопка--%>
+            <form action="" class="form-inline" method="GET" onsubmit="this.booksSearch.value = encodeURI(this.tempField.value)">
+                <%--окно ввода поиска--%>
+                <div class="col-md-10 form-group">
+                    <input name="booksSearch" type="hidden">
+                    <input name="tempField" class="form-control" id="search" type="text"
+                           placeholder="Введите название книги" value="${param.booksSearch}">
+                </div>
+                <%--кнопка поиска--%>
+                <button class="col-md-2 btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="margin-top: 10px">
         <div class="row">
             <c:forEach var="book" items="${books}" varStatus="loop">
-                <a class="col-xs-6 col-sm-4 col-md-3 col-lg-3" href="/bookpage?bookId=${book.id}">
+                <a class="col-xs-4 col-sm-4 col-md-2 col-lg-2" href="/bookpage?bookId=${book.id}">
                     <c:if test="${book.owner == null}">
+                        <h4 align="center">${book.name}</h4>
                         <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
-                             style="padding-bottom: 15px">
+                             style="margin-bottom: 15px">
                     </c:if>
                     <c:if test="${book.owner != null}">
+                        <h4 align="center">${book.name}</h4>
                         <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
-                             style="padding-bottom: 15px; opacity: 0.5">
+                             style="margin-bottom: 15px; opacity: 0.5">
                     </c:if>
                 </a>
             </c:forEach>
         </div>
     </div>
-
-
-    <%--    <table class="table">
-            <tr>
-                <td>Порядковый номер</td>
-                <td>Название</td>
-                <td>Описание</td>
-                <td>Дата добавления</td>
-            </tr>
-            <c:forEach var="book" items="${books}" varStatus="loop">
-                <tr>
-                    <td>${loop.index + 1}</td>
-                    <td>${book.name}</td>
-                    <td>${book.description}</td>
-                    <td>${book.date}</td>
-                </tr>
-            </c:forEach>
-        </table>--%>
 
 
 </div>
