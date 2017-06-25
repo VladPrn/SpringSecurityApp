@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="color: white"><h4>Simbir Library</h4></a>
+            <a class="navbar-brand" href="#"> <img class="img-responsive2" src="resources/logotip.png"><h4 style="color: white">Simbir Library</h4></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-ex1-collapse">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
