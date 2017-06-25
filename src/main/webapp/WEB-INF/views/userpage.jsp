@@ -17,8 +17,8 @@
             <div class="plate">
                 <p>
                     <b>Логин:</b> ${user.username}<br>
-                    <b>E-mail:</b> <span style="color:red">${user.email}</span><br>
-                    <b>Описание:</b> <span style="color:red">${user.description}</span>
+                    <b>E-mail:</b>${user.email}<br>
+                    <b>Описание:</b>${user.description}
                 </p>
             </div>
         </div>
