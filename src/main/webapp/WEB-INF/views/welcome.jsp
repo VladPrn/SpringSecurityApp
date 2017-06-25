@@ -11,6 +11,7 @@
 <body>
 <div class="container">
     <div class="container-fluid">
+        <br>
         <div class="col-md-3 pull-left">
             <h2>Книги</h2>
         </div>
@@ -74,8 +75,6 @@
             </c:if>
         </ul>
     </div>
-
-
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
