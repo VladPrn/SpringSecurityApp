@@ -13,6 +13,7 @@
 <body>
 
 <div class="container">
+    <br>
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Давай к нам!</h2>
         <spring:bind path="username">

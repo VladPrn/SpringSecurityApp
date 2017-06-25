@@ -16,27 +16,37 @@
             <div class="col-md-6">
                 <div class="plate">
                     <h3>Личная информация</h3>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="login">Логин</label>${System.out.println(pageContext.request.userPrincipal)}
-                            <input type="text" class="form-control" name="login" id="login" value="${pageContext.request.userPrincipal.name}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="text" class="form-control" name="email" id="email" value="//TODO выввести email">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Описание</label>
-                            <textarea class="form-control no-resize" rows="7" name="description" id="description">//TODO выввести description</textarea>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-info">Редактировать</button>
-                        </div>
-                    </form>
+                    <form:form method="POST" modelAttribute="userForm1">
+                        <spring:bind path="username">
+                            <label>Логин</label>
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="text" path="username" class="form-control" value="${userForm1.username}"></form:input>
+                                <form:errors path="username"></form:errors>
+                            </div>
+                        </spring:bind>
+
+                        <spring:bind path="email">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <label>E-mail</label>
+                                <form:input type="text" path="email" class="form-control" value="${userForm1.email}"></form:input>
+                                <form:errors path="email"></form:errors>
+                            </div>
+                        </spring:bind>
+
+                        <spring:bind path="description">
+                            <div class="form-group">
+                                <label>Описание</label>
+                                <form:textarea type="text" path="description" class="form-control no-resize" rows="7" value="${userForm1.description}"></form:textarea>
+                                <form:errors path="email"></form:errors>
+                            </div>
+                        </spring:bind>
+
+                        <button class="btn btn-info" type="submit">Редактировать</button>
+                    </form:form>
                 </div>
                 <div class="plate">
                     <h3>Смена пароля</h3>
-                    <form:form method="POST" modelAttribute="userForm">
+                    <form:form method="POST" modelAttribute="userForm2" class="form-signin">
                         <spring:bind path="password">
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <form:input type="password" path="password" class="form-control" placeholder="Пароль"></form:input>

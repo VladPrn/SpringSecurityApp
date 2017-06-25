@@ -1,32 +1,7 @@
-.plate {
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-textarea.form-control {
-    max-width: 100%;
-}
-
-.no-resize {
-    resize: none;
-}
-
-.book-picture {
-    max-width: 100%;
-}
-
-h4
-{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 body {
     padding-top: 40px;
     padding-bottom: 40px;
+    background-color: #eee;
 }
 
 .form-signin {
@@ -70,8 +45,4 @@ body {
 
 .has-error {
     color: red
-}
-
-.navbar-brand {
-    padding-top: 10px;
 }

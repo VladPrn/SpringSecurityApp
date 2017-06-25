@@ -8,6 +8,7 @@
 <head>
     <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
+
 <body>
 <div id="main" class="container">
     <div id="top" class="row">
