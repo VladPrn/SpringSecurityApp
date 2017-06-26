@@ -281,7 +281,7 @@ public class UserController {
         book.setDate(new Date(System.currentTimeMillis()));
         bookService.save(book);
 
-        return "addbook";
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
