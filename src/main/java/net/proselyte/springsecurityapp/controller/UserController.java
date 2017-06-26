@@ -289,12 +289,8 @@ public class UserController {
                 return "personal";
             }
             User user = getCurrentUser();
-            userForm2.setId(user.getId());
-            userForm2.setEmail(user.getEmail());
-            userForm2.setUsername(user.getUsername());
-            userForm2.setRoles(user.getRoles());
-            userForm2.setPassword(bCryptPasswordEncoder.encode(userForm2.getPassword()));
-            userService.save(userForm2);
+            user.setPassword(bCryptPasswordEncoder.encode(userForm2.getPassword()));
+            userService.save(user);
         }
 
         return "redirect:/personal";

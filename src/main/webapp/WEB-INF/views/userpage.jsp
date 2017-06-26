@@ -16,9 +16,9 @@
         <div class="col-md-6">
             <div class="plate">
                 <p>
-                    <b>Логин:</b> ${user.username}<br>
-                    <b>E-mail:</b>${user.email}<br>
-                    <b>Описание:</b>${user.description}
+                    <b>Логин: </b>${user.username}<br>
+                    <b>E-mail: </b>${user.email}<br>
+                    <b>Описание: </b>${user.description}
                 </p>
             </div>
         </div>
