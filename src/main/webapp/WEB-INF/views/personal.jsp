@@ -46,7 +46,7 @@
                 </div>
                 <div class="plate">
                     <h3>Смена пароля</h3>
-                    <form:form method="POST" modelAttribute="userForm2" class="form-signin">
+                    <form:form method="POST" modelAttribute="userForm2">
                         <spring:bind path="password">
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <form:input type="password" path="password" class="form-control" placeholder="Пароль"></form:input>
