@@ -250,6 +250,18 @@ public class UserController {
         return "personal";
     }
 
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
+    public String addbook(Model model){
+        List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
+
+        User current = getCurrentUser();
+        current.setUsername(null);
+
+        model.addAttribute("userForm1", current);
+        model.addAttribute("userForm2", new User());
+        model.addAttribute("books", books);
+        return "addbook";
+    }
 
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
     public String personal(Model model,

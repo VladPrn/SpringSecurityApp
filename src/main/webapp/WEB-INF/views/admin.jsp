@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <a href="add.html" class="btn btn-primary pull-right h2">Добавить книгу</a>
+            <a href="${contextPath}/addbook" class="btn btn-primary pull-right h2">Добавить книгу</a>
         </div>
     </div> <!-- /#top -->
 
@@ -53,7 +53,7 @@
                         <td>${book.description}</td>
                         <td>${book.date}</td>
                         <td class="actions">
-                            <a class="btn btn-success btn-xs" href="#">Изменить</a>
+                            <a class="btn btn-success btn-xs" href="${contextPath}/addbook">Изменить</a>
                             <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Удалить</a>
                         </td>
                     </tr>
