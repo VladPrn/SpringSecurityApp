@@ -3,6 +3,9 @@ package net.proselyte.springsecurityapp.controller;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -278,6 +281,7 @@ public class UserController {
             User user = getCurrentUser();
             userForm1.setId(user.getId());
             userForm1.setPassword(user.getPassword());
+            userForm1.setRoles(user.getRoles());
             userService.save(userForm1);
         }
 
@@ -329,7 +333,6 @@ public class UserController {
 
         return "redirect:/personal";
     }
-
 
     private User getCurrentUser() {
         UserDetails tempUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
