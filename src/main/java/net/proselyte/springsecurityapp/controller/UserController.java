@@ -260,15 +260,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addbook", method = RequestMethod.GET)
-    public String addbook(Model model){
-        List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
+    public String addbook(Model model,
+                          @RequestParam(value = "bookId", required=false) Long bookId){
 
-        User current = getCurrentUser();
-        current.setUsername(null);
+        Book book;
+        if (bookId != null) {
+            book = bookService.findById(bookId);
+        } else {
+            book =  new Book();
+        }
 
-        model.addAttribute("userForm1", current);
-        model.addAttribute("userForm2", new User());
-        model.addAttribute("books", books);
+        model.addAttribute("book", book);
+        return "addbook";
+    }
+
+    @RequestMapping(value = "/addbook", method = RequestMethod.POST)
+    public String addbook(Model model,
+                          @ModelAttribute("book") Book book) {
+
+        book.setDate(new Date(System.currentTimeMillis()));
+        bookService.save(book);
+
         return "addbook";
     }
 

@@ -65,4 +65,9 @@ public class BookServiceImpl implements BookService {
         commentDao.deleteAllByBookId(id);
         bookDao.delete(id);
     }
+
+    @Override
+    public void save(Book book) {
+        bookDao.save(book);
+    }
 }

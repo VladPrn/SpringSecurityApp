@@ -53,7 +53,7 @@
                         <td>${book.description}</td>
                         <td>${book.date}</td>
                         <td class="actions">
-                            <a class="btn btn-success btn-xs" href="${contextPath}/addbook">Изменить</a>
+                            <a class="btn btn-success btn-xs" href="${contextPath}/addbook?bookId=${book.id}">Изменить</a>
                             <form action="?deleteBookId=${book.id}" class="form-inline" method="POST">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <button class="btn btn-danger btn-xs" type="submit">Удалить</button>
