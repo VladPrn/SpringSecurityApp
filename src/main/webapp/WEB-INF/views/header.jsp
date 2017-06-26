@@ -68,7 +68,10 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <h3 class="page-header">Вы зашли,как ${pageContext.request.userPrincipal.name}.</h3>
+        <h3 class="page-header">Вы зашли, как ${pageContext.request.userPrincipal.name}.</h3>
+    </c:if>
+    <c:if test="${pageContext.request.userPrincipal.name == null}">
+        <h3 class="page-header">Привет, гость!</h3>
     </c:if>
 </div>
 <script src="js/jquery.min.js"></script>

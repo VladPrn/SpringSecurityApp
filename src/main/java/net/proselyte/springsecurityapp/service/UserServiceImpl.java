@@ -6,7 +6,6 @@ import net.proselyte.springsecurityapp.model.Role;
 import net.proselyte.springsecurityapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -27,15 +26,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleDao roleDao;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Override
     public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getOne(1L));
-        user.setRoles(roles);
+        if (user.getRoles() == null) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleDao.getOne(1L));
+            user.setRoles(roles);
+        }
         userDao.save(user);
     }
 

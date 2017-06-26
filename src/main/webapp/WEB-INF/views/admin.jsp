@@ -13,7 +13,7 @@
 <div id="main" class="container">
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2 name="books">Книги</h2>
+            <h2>Книги</h2>
         </div>
         <div class="col-md-6">
             <div class="input-group h2">
@@ -67,21 +67,21 @@
 
             <ul class="pagination">
                 <c:if test="${param.booksPage != 1}">
-                    <li><a href="?booksPage=${param.booksPage - 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">&lt; Назад</a></li>
+                    <li><a href="?booksPage=${param.booksPage - 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}">&lt; Назад</a></li>
                 </c:if>
                 <c:if test="${param.booksPage == 1}">
                     <li li class="disabled"><a>&lt; Назад</a></li>
                 </c:if>
                 <c:forEach var="curr" items="${booksPageContr.pages}">
                     <c:if test="${param.booksPage != curr}">
-                        <li><a href="?booksPage=${curr}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">${curr}</a></li>
+                        <li><a href="?booksPage=${curr}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}">${curr}</a></li>
                     </c:if>
                     <c:if test="${param.booksPage == curr}">
                         <li li class="disabled"><a>${curr}</a></li>
                     </c:if>
                 </c:forEach>
                 <c:if test="${param.booksPage != booksPageContr.countPages}">
-                    <li><a href="?booksPage=${param.booksPage + 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}#books">Вперед &gt;</a></li>
+                    <li><a href="?booksPage=${param.booksPage + 1}&usersPage=${param.usersPage}&booksSearch=${param.booksSearch}">Вперед &gt;</a></li>
                 </c:if>
                 <c:if test="${param.booksPage == booksPageContr.countPages}">
                     <li li class="disabled"><a>Вперед &gt;</a></li>

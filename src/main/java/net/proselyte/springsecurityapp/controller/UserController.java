@@ -3,6 +3,7 @@ package net.proselyte.springsecurityapp.controller;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Controller for {@link net.proselyte.springsecurityapp.model.User}'s pages.
@@ -44,6 +43,9 @@ public class UserController {
     @Autowired
     private UserBookBalaceService userBookBalanceService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
@@ -59,6 +61,7 @@ public class UserController {
             return "registration";
         }
 
+        userForm.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
@@ -289,6 +292,8 @@ public class UserController {
             userForm2.setId(user.getId());
             userForm2.setEmail(user.getEmail());
             userForm2.setUsername(user.getUsername());
+            userForm2.setRoles(user.getRoles());
+            userForm2.setPassword(bCryptPasswordEncoder.encode(userForm2.getPassword()));
             userService.save(userForm2);
         }
 
