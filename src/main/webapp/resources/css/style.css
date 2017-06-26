@@ -75,3 +75,7 @@ body {
 .navbar-brand {
     padding-top: 10px;
 }
+
+.form-inline {
+    display: inline-block;
+}

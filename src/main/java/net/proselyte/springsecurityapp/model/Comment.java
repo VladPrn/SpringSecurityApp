@@ -11,10 +11,10 @@ public class Comment {
     private Long id;
 
     @Column(name = "book_id")
-    private Long book_id;
+    private Long bookId;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "text")
     private String text;
@@ -31,20 +31,20 @@ public class Comment {
         this.id = id;
     }
 
-    public Long getBook_id() {
-        return book_id;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(Long book_id) {
-        this.book_id = book_id;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getText() {
