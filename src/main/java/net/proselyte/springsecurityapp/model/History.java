@@ -11,13 +11,13 @@ public class History {
     private Long id;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "book_id")
-    private Long book_id;
+    private Long bookId;
 
     @Column(name = "action_type")
-    private Long action_type;
+    private Long actionType;
 
     @Column(name="date")
     @Temporal(TemporalType.DATE)
@@ -31,28 +31,28 @@ public class History {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getBook_id() {
-        return book_id;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(Long book_id) {
-        this.book_id = book_id;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
-    public Long getAction_type() {
-        return action_type;
+    public Long getActionType() {
+        return actionType;
     }
 
-    public void setAction_type(Long action_type) {
-        this.action_type = action_type;
+    public void setActionType(Long actionType) {
+        this.actionType = actionType;
     }
 
     public Date getDate() {

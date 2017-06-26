@@ -18,5 +18,7 @@ public interface BookService {
 
     long count();
 
-    long countByNameContainingIgnoreCase(String str);
+    long countByNameContainingIgnoreCase(String str);;
+
+    void deleteById(Long id);
 }

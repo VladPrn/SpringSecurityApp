@@ -3,9 +3,6 @@ package net.proselyte.springsecurityapp.controller;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -184,6 +181,15 @@ public class UserController {
         return "admin";
     }
 
+    @RequestMapping(value = "/admin", method = RequestMethod.POST)
+    public String admin(Model model,
+                        @RequestParam(value = "deleteBookId", required=true) Long deleteBookId) {
+
+        bookService.deleteById(deleteBookId);
+
+        return "redirect:/admin";
+    }
+
     @RequestMapping(value = "/testdb", method = RequestMethod.GET)
     public String testdb(Model model){
         StringBuilder str = new StringBuilder();
@@ -211,11 +217,11 @@ public class UserController {
         str.append("История: ");
         str.append("<br>");
         for (History hist : historyService.findAll()) {
-            str.append(hist.getUser_id());
+            str.append(hist.getUserId());
             str.append(" : ");
-            str.append(hist.getBook_id());
+            str.append(hist.getBookId());
             str.append(" : ");
-            str.append(hist.getAction_type());
+            str.append(hist.getActionType());
             str.append(" : ");
             str.append(hist.getDate().toString());
             str.append("<br>");
@@ -225,9 +231,9 @@ public class UserController {
         str.append("Комментарии: ");
         str.append("<br>");
         for (Comment comment : commentService.findAll()) {
-            str.append(comment.getBook_id());
+            str.append(comment.getBookId());
             str.append(" : ");
-            str.append(comment.getUser_id());
+            str.append(comment.getUserId());
             str.append(" : ");
             str.append(comment.getText());
             str.append(" : ");
@@ -263,9 +269,9 @@ public class UserController {
 
         if (removeBookId != null) {
             History item = new History();
-            item.setUser_id(getCurrentUser().getId());
-            item.setBook_id(removeBookId);
-            item.setAction_type(1l);
+            item.setUserId(getCurrentUser().getId());
+            item.setBookId(removeBookId);
+            item.setActionType(1l);
             item.setDate(new Date(System.currentTimeMillis()));
 
             historyService.save(item);
@@ -325,9 +331,9 @@ public class UserController {
                            @RequestParam(value = "addBookId", required=true) Long addBookId) {
 
         History item = new History();
-        item.setUser_id(getCurrentUser().getId());
-        item.setBook_id(addBookId);
-        item.setAction_type(-1l);
+        item.setUserId(getCurrentUser().getId());
+        item.setBookId(addBookId);
+        item.setActionType(-1l);
         item.setDate(new Date(System.currentTimeMillis()));
         historyService.save(item);
 
