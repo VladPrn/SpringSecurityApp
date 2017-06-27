@@ -50,7 +50,7 @@
                         <li><a href="${contextPath}/admin" style="color: white"><h4>Администрирование</h4></a></li>
                     </sec:authorize>
                     <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
-                    <li><a href="${contextPath}/personal" style="color: white"><h4>Личный кабинет</h4></a></li>
+                    <li><a href="${contextPath}/personal" style="color: white"><h4>Личный кабинет ${pageContext.request.userPrincipal.name}</h4></a></li>
                     <li><a onclick="document.forms['logoutForm'].submit()" style="color: white"><h4>Выйти</h4></a></li>
                 </c:if>
 
@@ -67,14 +67,11 @@
 </nav>
 
 <div id="main" class="container-fluid">
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-        <h3 class="page-header">Вы зашли, как ${pageContext.request.userPrincipal.name}.</h3>
+    <c:if test="${pageContext.request.getAttribute('javax.servlet.forward.request_uri') == '/admin'}">
+        <h3 class="page-header">Страница администрирования</h3>
     </c:if>
-    <c:if test="${pageContext.request.userPrincipal.name == null}">
-        <h3 class="page-header">Привет, гость!</h3>
+    <c:if test="${pageContext.request.getAttribute('javax.servlet.forward.request_uri') == '/personal'}">
+        <h3 class="page-header">Личный кабинет</h3>
     </c:if>
 </div>
 <script src="js/jquery.min.js"></script>
