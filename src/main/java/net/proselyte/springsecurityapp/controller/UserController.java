@@ -3,6 +3,7 @@ package net.proselyte.springsecurityapp.controller;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -48,6 +55,9 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -125,7 +135,6 @@ public class UserController {
         List<ExtendBook> extendBooks = getExtendBooks(books);
         model.addAttribute("books", extendBooks);
 
-        model.addAttribute("books", extendBooks);
         model.addAttribute("booksPageContr", new PageController(booksCountPages, booksPage));
         return "welcome";
     }
@@ -288,11 +297,26 @@ public class UserController {
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addbook(Model model,
-                          @ModelAttribute("book") Book book) {
+                          @RequestParam("file") MultipartFile file,
+                          @RequestParam("name") String name,
+                          @RequestParam("description") String description) {
 
+        Book book = new Book();
+        book.setName(name);
+        book.setDescription(description);
         book.setDate(new Date(System.currentTimeMillis()));
-        bookService.save(book);
 
+        try {
+            byte[] bytes = file.getBytes();
+            String path = System.currentTimeMillis() + file.getOriginalFilename();
+            file.transferTo(resourceLoader.getResource("resources/images/" + path).getFile());
+
+            book.setPicture(path);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        bookService.save(book);
         return "redirect:/admin";
     }
 
