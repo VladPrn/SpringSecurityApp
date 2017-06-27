@@ -18,7 +18,7 @@
                     <h3>Личная информация</h3>
                     <form:form method="POST" modelAttribute="userForm1">
                         <spring:bind path="username">
-                            <label>Логин</label>
+                            <label>Логин [при изменении потребуется повторный вход]</label>
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <form:input type="text" path="username" class="form-control" value="${pageContext.request.userPrincipal.name}"></form:input>
                                 <form:errors path="username"></form:errors>

@@ -4,10 +4,12 @@ import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -284,7 +287,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
-    public String personal(Model model,
+    public String personal(Model model,  HttpServletRequest request, HttpServletResponse response,
                            @RequestParam(value = "removeBookId", required=false) Long removeBookId,
                            @ModelAttribute("userForm1") User userForm1,
                            @ModelAttribute("userForm2") User userForm2,
@@ -307,11 +310,20 @@ public class UserController {
                 model.addAttribute("books", books);
                 return "personal";
             }
+
             User user = getCurrentUser();
             userForm1.setId(user.getId());
             userForm1.setPassword(user.getPassword());
             userForm1.setRoles(user.getRoles());
             userService.save(userForm1);
+
+            if (!user.getUsername().equals(userForm1.getUsername())) {
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                if (auth != null) {
+                    new SecurityContextLogoutHandler().logout(request, response, auth);
+                    return "redirect:/login";
+                }
+            }
         }
 
         if (userForm2.getPassword() != null) {

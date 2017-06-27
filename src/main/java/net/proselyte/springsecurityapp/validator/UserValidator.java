@@ -31,6 +31,12 @@ public class UserValidator {
             }
         }
 
+        if (type == REGISTRATION) {
+            if (userService.findByUsername(user.getUsername()) != null) {
+                errors.rejectValue("username", "Duplicate.userForm.username");
+            }
+        }
+
         if (type == REGISTRATION || type == CHANGE_PERSONAL) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
             if (user.getUsername().length() < 8 || user.getUsername().length() > 32) {

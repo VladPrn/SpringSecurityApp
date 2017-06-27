@@ -12,8 +12,10 @@ CREATE TABLE users (
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  picture VARCHAR(100),
-  description VARCHAR(255)
+  picture TEXT,
+  description TEXT,
+  UNIQUE (username),
+  UNIQUE (email)
 )
   ENGINE = InnoDB;
 
@@ -30,7 +32,7 @@ CREATE TABLE roles (
 CREATE TABLE books (
   id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
-  description VARCHAR(1000) NOT NULL,
+  description TEXT NOT NULL,
   picture VARCHAR(100),
   date DATE NOT NULL
 )
@@ -69,7 +71,7 @@ CREATE TABLE comments (
   id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   book_id INT NOT NULL,
   user_id INT NOT NULL,
-  text VARCHAR(1000) NOT NULL,
+  text TEXT NOT NULL,
   time DATETIME NOT NULL,
 
   FOREIGN KEY (book_id) REFERENCES books (id),
