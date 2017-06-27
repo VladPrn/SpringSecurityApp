@@ -73,6 +73,9 @@
     <c:if test="${pageContext.request.getAttribute('javax.servlet.forward.request_uri') == '/personal'}">
         <h3 class="page-header">Личный кабинет</h3>
     </c:if>
+    <c:if test="${pageContext.request.getAttribute('javax.servlet.forward.request_uri') == '/userpage'}">
+        <h3 class="page-header">Страница пользователя</h3>
+    </c:if>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
