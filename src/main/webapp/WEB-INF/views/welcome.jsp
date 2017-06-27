@@ -35,18 +35,16 @@
     <div class="container-fluid" style="margin-top: 10px">
         <div class="row">
             <c:forEach var="book" items="${books}" varStatus="loop">
-                <a class="col-xs-4 col-sm-4 col-md-2 col-lg-2" href="/bookpage?bookId=${book.id}">
-                    <c:if test="${book.owner == null}">
-                        <h4 align="center">${book.name}</h4>
-                        <img src="${contextPath}/resources/images/${book.picture}" class="img-responsive"
-                             style="margin-bottom: 15px">
-                    </c:if>
-                    <c:if test="${book.owner != null}">
-                        <h4 align="center">${book.name}</h4>
-                        <img src="${contextPath}/resources/images/${book.picture}" class="img-responsive"
-                             style="margin-bottom: 15px; opacity: 0.5">
-                    </c:if>
-                </a>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                    <div class="thumbnail ${book.owner == null ? '' : 'book-out'}">
+                        <div class="thumbnail-book-picture" style="background-image: url(${contextPath}/resources/images/${book.picture})"></div>
+                        <div class="caption ">
+                            <h4>${book.name}</h4>
+                            <div class="book-thumbnail-description" >${book.description}</div>
+                            <p><a href="/bookpage?bookId=${book.id}" class="btn btn-primary" role="button">Перейти</a></p>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
         </div>
     </div>
