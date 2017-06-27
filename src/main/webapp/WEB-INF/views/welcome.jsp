@@ -38,12 +38,12 @@
                 <a class="col-xs-4 col-sm-4 col-md-2 col-lg-2" href="/bookpage?bookId=${book.id}">
                     <c:if test="${book.owner == null}">
                         <h4 align="center">${book.name}</h4>
-                        <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
+                        <img src="${contextPath}/resources/images/${book.picture}" class="img-responsive"
                              style="margin-bottom: 15px">
                     </c:if>
                     <c:if test="${book.owner != null}">
                         <h4 align="center">${book.name}</h4>
-                        <img src="https://ozon-st.cdn.ngenix.net/multimedia/1007119597.jpg" class="img-responsive"
+                        <img src="${contextPath}/resources/images/${book.picture}" class="img-responsive"
                              style="margin-bottom: 15px; opacity: 0.5">
                     </c:if>
                 </a>
