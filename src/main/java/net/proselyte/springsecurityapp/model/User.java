@@ -1,6 +1,9 @@
 package net.proselyte.springsecurityapp.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -90,5 +93,13 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getRoleString() {
+        Set<Role> r = getRoles();
+        if (r.iterator().hasNext()) {
+            return r.iterator().next().getName();
+        }
+        return "";
     }
 }

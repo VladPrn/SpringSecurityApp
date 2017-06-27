@@ -28,11 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        if (user.getRoles() == null) {
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleDao.getOne(1L));
-            user.setRoles(roles);
-        }
         userDao.save(user);
     }
 

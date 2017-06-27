@@ -26,12 +26,15 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private RoleService roleService;
+
+    @Autowired
     private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;
-	
-	@Autowired
+
+    @Autowired
     private BookService bookService;
 
     @Autowired
@@ -62,6 +65,9 @@ public class UserController {
         }
 
         userForm.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
+        Set<Role> roles = new HashSet<Role>();
+        roles.add(roleService.getById(1l));
+        userForm.setRoles(roles);
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
@@ -183,9 +189,30 @@ public class UserController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public String admin(Model model,
-                        @RequestParam(value = "deleteBookId", required=true) Long deleteBookId) {
+                        @RequestParam(value = "deleteBookId", required=false) Long deleteBookId,
+                        @RequestParam(value = "blockUserId", required=false) Long blockUserId,
+                        @RequestParam(value = "unblockUserId", required=false) Long unblockUserId) {
 
-        bookService.deleteById(deleteBookId);
+        if (deleteBookId != null) {
+            bookService.deleteById(deleteBookId);
+        }
+
+        if (blockUserId != null) {
+            User user = userService.findById(blockUserId);
+            Set<Role> roles = new HashSet<Role>();
+            roles.add(roleService.getById(3l));
+            user.setRoles(roles);
+            userService.save(user);
+        }
+
+        if (unblockUserId != null) {
+            User user = userService.findById(unblockUserId);
+            Set<Role> roles = new HashSet<Role>();
+            roles.add(roleService.getById(1l));
+            user.setRoles(roles);
+            userService.save(user);
+        }
+
 
         return "redirect:/admin";
     }
@@ -347,12 +374,14 @@ public class UserController {
         ExtendBook extendBook = getExtendBook(book);
 
         model.addAttribute("book", extendBook);
+        model.addAttribute("comments", commentService.findAll());
+        model.addAttribute("newComment", new Comment());
         return "bookpage";
     }
 
     @RequestMapping(value = "/bookpage", method = RequestMethod.POST)
     public String addBook(Model model,
-                           @RequestParam(value = "addBookId", required=true) Long addBookId) {
+                          @RequestParam(value = "addBookId", required=true) Long addBookId) {
 
         History item = new History();
         item.setUserId(getCurrentUser().getId());

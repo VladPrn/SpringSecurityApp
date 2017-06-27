@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -109,7 +110,23 @@
                     <tr>
                         <td>${(param.usersPage - 1) * 5 + loop.index + 1}</td>
                         <td>${user.username}</td>
-                        <td class="actions"><a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Блокировать</a></td>
+                        <td class="actions">
+                            <c:if test="${false}">
+                                <span>Админ</span>
+                            </c:if>
+                            <c:if test="${true}">
+                                <form action="?blockUserId=${user.id}" class="form-inline" method="POST">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <button class="btn btn-danger btn-xs" type="submit">Заблокировать</button>
+                                </form>
+                            </c:if>
+                            <c:if test="${true}">
+                                <form action="?unblockUserId=${user.id}" class="form-inline" method="POST">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <button class="btn btn-success btn-xs" type="submit">Разблокировать</button>
+                                </form>
+                            </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

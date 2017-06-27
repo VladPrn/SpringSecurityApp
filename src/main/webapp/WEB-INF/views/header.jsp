@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Xmas
@@ -38,17 +39,19 @@
             <a class="navbar-brand" href="/welcome"> <img class="img-responsive2" src="${contextPath}/resources/images/logo.png" width="149"></a>         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-ex1-collapse">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
+                <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </c:if>
             <ul class="nav navbar-nav navbar-right">
 
-                <c:if test="${pageContext.request.userPrincipal.name == 'proselyte'}">
-                    <li><a href="${contextPath}/admin" style="color: white"><h4>Администрирование</h4></a></li>
-                </c:if>
-                <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
-                <li><a href="${contextPath}/personal" style="color: white"><h4>Личный кабинет</h4></a></li>
-                <li><a onclick="document.forms['logoutForm'].submit()" style="color: white"><h4>Выйти</h4></a></li>
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li><a href="${contextPath}/admin" style="color: white"><h4>Администрирование</h4></a></li>
+                    </sec:authorize>
+                    <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
+                    <li><a href="${contextPath}/personal" style="color: white"><h4>Личный кабинет</h4></a></li>
+                    <li><a onclick="document.forms['logoutForm'].submit()" style="color: white"><h4>Выйти</h4></a></li>
                 </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
