@@ -18,7 +18,8 @@
             <div class="plate">
                 <form action="/addbook" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <div class="form-group">
+                    <input type="hidden" name="id" value="${book.id}"/>
+                    <div class="form-group"
                         <label>Название</label>
                         <input type="text" class="form-control" name="name" value="${book.name}"/>
                     </div>

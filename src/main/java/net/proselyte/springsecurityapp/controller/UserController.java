@@ -13,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -225,48 +228,6 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/testdb", method = RequestMethod.GET)
-    public String testdb(Model model){
-        StringBuilder str = new StringBuilder();
-
-        str.append("Пользователи: ");
-        str.append("<br>");
-        for (User user : userService.findAll()) {
-            str.append(user.getUsername());
-            str.append("<br>");
-        }
-        str.append("<br>");
-
-        str.append("Книги: ");
-        str.append("<br>");
-        for (Book book : bookService.findAll()) {
-            str.append(book.getName());
-            str.append(" : ");
-            str.append(book.getDescription());
-            str.append(" : ");
-            str.append(book.getDate().toString());
-            str.append("<br>");
-        }
-        str.append("<br>");
-
-        str.append("История: ");
-        str.append("<br>");
-        for (History hist : historyService.findAll()) {
-            str.append(hist.getUserId());
-            str.append(" : ");
-            str.append(hist.getBookId());
-            str.append(" : ");
-            str.append(hist.getActionType());
-            str.append(" : ");
-            str.append(hist.getDate().toString());
-            str.append("<br>");
-        }
-        str.append("<br>");
-
-        model.addAttribute("log", str.toString());
-        return "testdb";
-    }
-
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(Model model){
         List<Book> books = userBookBalanceService.findActiveBooks(getCurrentUser().getId());
@@ -297,11 +258,13 @@ public class UserController {
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addbook(Model model,
+                          @RequestParam("id") Long id,
                           @RequestParam("file") MultipartFile file,
                           @RequestParam("name") String name,
                           @RequestParam("description") String description) {
 
         Book book = new Book();
+        book.setId(id);
         book.setName(name);
         book.setDescription(description);
         book.setDate(new Date(System.currentTimeMillis()));
@@ -392,6 +355,8 @@ public class UserController {
 
     @RequestMapping(value = "/bookpage", method = RequestMethod.POST)
     public String addBook(Model model,
+                          HttpServletRequest request,
+                          @RequestParam(value = "bookId", required=false) Long bookId,
                           @RequestParam(value = "addBookId", required=false) Long addBookId,
                           @ModelAttribute(value = "newComment") Comment newComment) {
 
@@ -402,15 +367,17 @@ public class UserController {
             item.setActionType(-1l);
             item.setDate(new Date(System.currentTimeMillis()));
             historyService.save(item);
-        }
 
-        if (newComment.getText() != null) {
+            return "redirect:/personal";
+        } else if (newComment.getText() != null) {
             newComment.setUserId(getCurrentUser().getId());
             newComment.setTime(new Date(System.currentTimeMillis()));
             commentService.save(newComment);
-        }
 
-        return "redirect:/personal";
+            return "redirect:/bookpage" + "?" + request.getQueryString();
+        } else {
+            return "welcome";
+        }
     }
 
     private User getCurrentUser() {
