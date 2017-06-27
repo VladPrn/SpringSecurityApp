@@ -111,16 +111,16 @@
                         <td>${(param.usersPage - 1) * 5 + loop.index + 1}</td>
                         <td>${user.username}</td>
                         <td class="actions">
-                            <c:if test="${false}">
+                            <c:if test="${user.roleString == 'ROLE_ADMIN'}">
                                 <span>Админ</span>
                             </c:if>
-                            <c:if test="${true}">
+                            <c:if test="${user.roleString == 'ROLE_USER'}">
                                 <form action="?blockUserId=${user.id}" class="form-inline" method="POST">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button class="btn btn-danger btn-xs" type="submit">Заблокировать</button>
                                 </form>
                             </c:if>
-                            <c:if test="${true}">
+                            <c:if test="${user.roleString == 'ROLE_BLOCKED'}">
                                 <form action="?unblockUserId=${user.id}" class="form-inline" method="POST">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button class="btn btn-success btn-xs" type="submit">Разблокировать</button>
