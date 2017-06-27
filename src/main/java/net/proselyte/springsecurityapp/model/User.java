@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,6 +39,9 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -93,6 +97,14 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComment(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getRoleString() {

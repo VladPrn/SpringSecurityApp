@@ -254,20 +254,6 @@ public class UserController {
         }
         str.append("<br>");
 
-        str.append("Комментарии: ");
-        str.append("<br>");
-        for (Comment comment : commentService.findAll()) {
-            str.append(comment.getBookId());
-            str.append(" : ");
-            str.append(comment.getUserId());
-            str.append(" : ");
-            str.append(comment.getText());
-            str.append(" : ");
-            str.append(comment.getTime().toString());
-            str.append("<br>");
-        }
-        str.append("<br>");
-
         model.addAttribute("log", str.toString());
         return "testdb";
     }
@@ -373,21 +359,32 @@ public class UserController {
         ExtendBook extendBook = getExtendBook(book);
 
         model.addAttribute("book", extendBook);
-        model.addAttribute("comments", commentService.findAll());
+        model.addAttribute("comments", commentService.findByBookId(bookId));
+        Comment comment = new Comment();
+        comment.setBookId(bookId);
         model.addAttribute("newComment", new Comment());
         return "bookpage";
     }
 
     @RequestMapping(value = "/bookpage", method = RequestMethod.POST)
     public String addBook(Model model,
-                          @RequestParam(value = "addBookId", required=true) Long addBookId) {
+                          @RequestParam(value = "addBookId", required=false) Long addBookId,
+                          @ModelAttribute(value = "newComment") Comment newComment) {
 
-        History item = new History();
-        item.setUserId(getCurrentUser().getId());
-        item.setBookId(addBookId);
-        item.setActionType(-1l);
-        item.setDate(new Date(System.currentTimeMillis()));
-        historyService.save(item);
+        if (addBookId != null) {
+            History item = new History();
+            item.setUserId(getCurrentUser().getId());
+            item.setBookId(addBookId);
+            item.setActionType(-1l);
+            item.setDate(new Date(System.currentTimeMillis()));
+            historyService.save(item);
+        }
+
+        if (newComment.getText() != null) {
+            newComment.setUserId(getCurrentUser().getId());
+            newComment.setTime(new Date(System.currentTimeMillis()));
+            commentService.save(newComment);
+        }
 
         return "redirect:/personal";
     }

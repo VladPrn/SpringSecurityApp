@@ -75,7 +75,7 @@
                 <li>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <div class="author">${comment.userId}</div>
+                            <div class="author">${comment.user.username}</div>
                             <div class="metadata">
                                 <span class="date">${comment.time.toGMTString()}</span>
                             </div>

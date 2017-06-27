@@ -23,6 +23,10 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -61,5 +65,13 @@ public class Comment {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
