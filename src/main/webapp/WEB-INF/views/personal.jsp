@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -13,6 +14,7 @@
 <body>
 <div class="container">
         <div class="row">
+            <sec:authorize access="hasAnyRole('ADMIN', 'USER')">
             <div class="col-md-6">
                 <div class="plate">
                     <h3>Личная информация</h3>
@@ -98,6 +100,12 @@
                     </table>
                 </div>
             </div>
+            </sec:authorize>
+            <sec:authorize access="hasRole('BLOCKED')">
+                <p>Вы заблокированы!</p>
+                <p>Вы не можете менять свои данные!</p>
+                <p>Просмотреть инфорацию о себе вы можете по <a href="userpage?userId=${userForm1.id}">ссылке</a></p>
+            </sec:authorize>
         </div>
 </div>
 
