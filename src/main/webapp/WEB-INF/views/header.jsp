@@ -44,7 +44,6 @@
                 </form>
             </c:if>
             <ul class="nav navbar-nav navbar-right">
-
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="${contextPath}/admin" style="color: white"><h4>Администрирование</h4></a></li>
@@ -55,12 +54,9 @@
                 </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
-                        <li><a href="${contextPath}/login" style="color: white"><h4>Войти</h4></a></li>
-                    </ul>
+                    <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
+                    <li><a href="${contextPath}/login" style="color: white"><h4>Войти</h4></a></li>
                 </c:if>
-
             </ul>
         </div>
     </div>
