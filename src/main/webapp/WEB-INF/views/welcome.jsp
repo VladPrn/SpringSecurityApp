@@ -11,24 +11,24 @@
 <body>
 <div class="container">
     <div class="container-fluid">
-        <br>
-        <div class="col-md-3 pull-left">
-            <h2>Книги</h2>
-        </div>
-        <div class="col-md-3 input-group h2 pull-right">
-            <%--форма поиска окно+кнопка--%>
-            <form action="" class="form-inline" method="GET" onsubmit="this.booksSearch.value = encodeURI(this.tempField.value)">
-                <%--окно ввода поиска--%>
-                <div class="col-md-10 form-group">
-                    <input name="booksSearch" type="hidden">
-                    <input name="tempField" class="form-control" id="search" type="text"
-                           placeholder="Введите название книги" value="${param.booksSearch}">
-                </div>
-                <%--кнопка поиска--%>
-                <button class="col-md-2 btn btn-primary" type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form>
+        <div class="row">
+            <div class="col-md-6 col-sm-4 col-xs-4">
+                <h2>Книги</h2>
+            </div>
+            <div class="col-md-6 col-sm-8 col-xs-8">
+                <form action="" class="search-form" method="GET" onsubmit="this.booksSearch.value = encodeURI(this.tempField.value)">
+                    <div class="cell search-field-cell">
+                        <input name="booksSearch" type="hidden">
+                        <input name="tempField" class="form-control" id="search" type="text"
+                               placeholder="Введите название книги" value="${param.booksSearch}">
+                    </div>
+                    <div class="cell">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
