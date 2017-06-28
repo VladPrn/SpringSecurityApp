@@ -50,7 +50,7 @@
                     </sec:authorize>
                     <li><a href="${contextPath}/welcome" style="color: white"><h4>Главная</h4></a></li>
                     <li><a href="${contextPath}/personal" style="color: white"><h4>Личный кабинет ${pageContext.request.userPrincipal.name}</h4></a></li>
-                    <li><a onclick="document.forms['logoutForm'].submit()" style="color: white"><h4>Выйти</h4></a></li>
+                    <li><a onclick="document.forms['logoutForm'].submit()" style="color: white;cursor: pointer"><h4>Выйти</h4></a></li>
                 </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
