@@ -8,6 +8,7 @@ public class ExtendBook extends Book {
         this.setId(book.getId());
         this.setName(book.getName());
         this.setDescription(book.getDescription());
+        this.setAuthor(book.getAuthor());
         this.setDate(book.getDate());
         this.setPicture(book.getPicture());
         this.owner = null;

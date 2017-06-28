@@ -30,7 +30,8 @@
                 <img class="book-picture" src="${contextPath}/resources/images/${book.picture}" alt="">
             </div>
             <div class="col-md-8">
-                <p><b>Описание:</b>${book.description}</p>
+                <p><b>Описание: </b>${book.description}</p>
+                <p><b>Автор(ы): </b>${book.author}</p>
                 <c:if test="${book.owner != null}">
                     <c:if test="${pageContext.request.userPrincipal.name != book.owner.username}">
                         <p>

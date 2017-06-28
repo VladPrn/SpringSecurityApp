@@ -18,9 +18,13 @@ public interface BookService {
 
     List<Book> findByAuthorContainingIgnoreCaseOrderByNameAsc(String str, int page, int size);
 
+    List<Book> findByNameContainingOrAuthorContainingIgnoreCaseOrderByNameAsc(String str, int page, int size);
+
     long count();
 
-    long countByNameContainingIgnoreCase(String str);;
+    long countByNameContainingIgnoreCase(String str);
+
+    long countByNameContainingOrAuthorContainingIgnoreCase(String str);
 
     void deleteById(Long id);
 

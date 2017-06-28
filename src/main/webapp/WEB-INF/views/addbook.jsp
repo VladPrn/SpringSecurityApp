@@ -27,6 +27,10 @@
                         <label>Описание</label>
                         <input type="text" class="form-control" name="description" value="${book.description}"/>
                     </div>
+                    <div class="form-group">
+                        <label>Автор(ы)</label>
+                        <input type="text" class="form-control" name="author" value="${book.author}"/>
+                    </div>
                     <input type="file" name="file" />
                     <input type="submit" class="btn btn-success" value="Загрузить"/>
                 </form>

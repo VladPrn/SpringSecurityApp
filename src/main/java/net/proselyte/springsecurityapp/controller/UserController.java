@@ -125,7 +125,7 @@ public class UserController {
             return "redirect:/?booksPage=" + booksPage + "&booksSearch=" + booksSearch;
         }
 
-        int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
+        int booksCount = (int) bookService.countByNameContainingOrAuthorContainingIgnoreCase(booksSearch);
         int booksCountPages = booksCount / 12 + (booksCount % 12 > 0 ? 1 : 0);
         if (booksCountPages < 1) {
             booksCountPages = 1;
@@ -137,7 +137,7 @@ public class UserController {
             booksPage = booksCountPages;
         }
 
-        List<Book> books = bookService.findByNameContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 12);
+        List<Book> books = bookService.findByNameContainingOrAuthorContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 12);
         List<ExtendBook> extendBooks = getExtendBooks(books);
         model.addAttribute("books", extendBooks);
 
@@ -172,7 +172,7 @@ public class UserController {
             return "redirect:/admin?booksPage=" + booksPage + "&usersPage=" + usersPage + "&booksSearch=" + booksSearch;
         }
 
-        int booksCount = (int) bookService.countByNameContainingIgnoreCase(booksSearch);
+        int booksCount = (int) bookService.countByNameContainingOrAuthorContainingIgnoreCase(booksSearch);
         int booksCountPages = booksCount / 5 + (booksCount % 5 > 0 ? 1 : 0);
         if (booksCountPages < 1) {
             booksCountPages = 1;
@@ -183,7 +183,7 @@ public class UserController {
         if (booksPage > booksCountPages) {
             booksPage = booksCountPages;
         }
-        List<Book> books = bookService.findByNameContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 5);
+        List<Book> books = bookService.findByNameContainingOrAuthorContainingIgnoreCaseOrderByNameAsc(booksSearch, booksPage - 1, 5);
         model.addAttribute("books", books);
 
         int usersCount = (int) userService.count();
@@ -264,12 +264,14 @@ public class UserController {
                           @RequestParam("id") Long id,
                           @RequestParam("file") MultipartFile file,
                           @RequestParam("name") String name,
-                          @RequestParam("description") String description) {
+                          @RequestParam("description") String description,
+                          @RequestParam("author") String author) {
 
         Book book = new Book();
         book.setId(id);
         book.setName(name);
         book.setDescription(description);
+        book.setAuthor(author);
         book.setDate(new Date(System.currentTimeMillis()));
 
         try {
