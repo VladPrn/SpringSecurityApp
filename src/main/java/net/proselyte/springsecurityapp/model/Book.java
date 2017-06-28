@@ -17,6 +17,9 @@ public class Book {
         @Column(name = "description")
         private String description;
 
+        @Column(name = "author")
+        private String author;
+
         @Column(name = "picture")
         private String picture;
 
@@ -46,6 +49,14 @@ public class Book {
 
         public void setDescription(String description) {
                 this.description = description;
+        }
+
+        public String getAuthor() {
+                return author;
+        }
+
+        public void setAuthor(String author) {
+                this.author = author;
         }
 
         public String getPicture() {

@@ -49,6 +49,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findByAuthorContainingIgnoreCaseOrderByNameAsc(String str, int page, int size) {
+        return bookDao.findByAuthorContainingIgnoreCaseOrderByNameAsc(str, new PageRequest(page, size));
+    }
+
+    @Override
     public long count() {
         return bookDao.count();
     }

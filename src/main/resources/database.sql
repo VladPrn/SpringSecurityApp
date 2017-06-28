@@ -33,12 +33,14 @@ CREATE TABLE books (
   id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   description TEXT NOT NULL,
+  author VARCHAR(100),
   picture VARCHAR(100),
   date DATE NOT NULL
 )
   ENGINE = InnoDB;
 
 CREATE INDEX index_books_name ON books(name);
+CREATE INDEX index_books_author ON books(author);
 
 -- Table for mapping user and roles: user_roles
 CREATE TABLE user_roles (
@@ -174,48 +176,48 @@ INSERT INTO user_roles VALUES (39, 1);
 INSERT INTO user_roles VALUES (40, 1);
 INSERT INTO user_roles VALUES (41, 1);
 
-INSERT INTO books VALUES (1, 'Код.Тайный язык информатики', 'Эта книга — азбука компьютерных технологий. Шаг за шагом автор знакомит читателя с сущностью кодирования информации, рассказывает об истории возникновения компьютеров, на практических примерах помогает освоить основные концепции информационных технологий, подробно излагает принципы работы процессора и других устройств компьютера. Написанная живо, доступно, иногда иронично, книга богато иллюстрирована, состоит из 25 глав и предметного указателя. Издание адресовано в первую очередь студентам вузов (как гуманитарных, так и технических), а также всем, кто интересуется принципами создания и работы компьютеров.', 'default.jpeg', '2012-12-12');
-INSERT INTO books VALUES (2, 'Small book', 'About JQuery', 'default.jpeg', '2015-12-12');
-INSERT INTO books VALUES (3, 'Русская книга', 'Русская книга с кирилицей', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (4, 'Middle book2', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (5, 'Big book3', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (6, 'Small book4', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (7, 'Simple book5', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (8, 'Small book6', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (9, 'Middle book7', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (10, 'Big book8', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (11, 'Русская книга9', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (12, 'Middle book10', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (13, 'Big book11', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (14, 'Big book12', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (15, 'Small book13', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (16, 'Русская книга14', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (17, 'Simple book15', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (18, 'Middle book16', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (19, 'Small book17', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (20, 'Middle book18', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (21, 'Big book19', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (22, 'Middle book20', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (23, 'Middle book21', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (24, 'Simple book22', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (25, 'Big book23', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (26, 'Русская книга24', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (27, 'Big book25', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (28, 'Small book26', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (29, 'Big book27', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (30, 'Simple book28', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (31, 'Big book29', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (32, 'Small book30', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (33, 'Русская книга31', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (34, 'Big book32', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (35, 'Big book33', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (36, 'Simple book34', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (37, 'Русская книга35', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (38, 'Big book36', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (39, 'Simple book37', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (40, 'Middle book38', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (41, 'Middle book39', 'About book', 'default.jpeg', '2017-12-12');
-INSERT INTO books VALUES (42, 'Big book40', 'About book', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (1, 'Код.Тайный язык информатики', 'Эта книга — азбука компьютерных технологий. Шаг за шагом автор знакомит читателя с сущностью кодирования информации, рассказывает об истории возникновения компьютеров, на практических примерах помогает освоить основные концепции информационных технологий, подробно излагает принципы работы процессора и других устройств компьютера. Написанная живо, доступно, иногда иронично, книга богато иллюстрирована, состоит из 25 глав и предметного указателя. Издание адресовано в первую очередь студентам вузов (как гуманитарных, так и технических), а также всем, кто интересуется принципами создания и работы компьютеров.', 'Иванов', 'default.jpeg', '2012-12-12');
+INSERT INTO books VALUES (2, 'Small book', 'About JQuery', 'Иванов', 'default.jpeg', '2015-12-12');
+INSERT INTO books VALUES (3, 'Русская книга', 'Русская книга с кирилицей', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (4, 'Middle book2', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (5, 'Big book3', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (6, 'Small book4', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (7, 'Simple book5', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (8, 'Small book6', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (9, 'Middle book7', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (10, 'Big book8', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (11, 'Русская книга9', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (12, 'Middle book10', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (13, 'Big book11', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (14, 'Big book12', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (15, 'Small book13', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (16, 'Русская книга14', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (17, 'Simple book15', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (18, 'Middle book16', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (19, 'Small book17', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (20, 'Middle book18', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (21, 'Big book19', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (22, 'Middle book20', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (23, 'Middle book21', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (24, 'Simple book22', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (25, 'Big book23', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (26, 'Русская книга24', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (27, 'Big book25', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (28, 'Small book26', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (29, 'Big book27', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (30, 'Simple book28', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (31, 'Big book29', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (32, 'Small book30', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (33, 'Русская книга31', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (34, 'Big book32', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (35, 'Big book33', 'About book', 'Иванов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (36, 'Simple book34', 'About book', 'Печеркин, Кузнецова', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (37, 'Русская книга35', 'About book', 'Степченко', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (38, 'Big book36', 'About book', 'Кузнецов', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (39, 'Simple book37', 'About book', 'Царьков', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (40, 'Middle book38', 'About book', 'Волков', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (41, 'Middle book39', 'About book', 'Кузнецова', 'default.jpeg', '2017-12-12');
+INSERT INTO books VALUES (42, 'Big book40', 'About book', 'Печеркин', 'default.jpeg', '2017-12-12');
 
 INSERT INTO history (user_id, book_id, action_type, date) VALUES (1, 1, -1, '2017-06-01');
 INSERT INTO history (user_id, book_id, action_type, date) VALUES (1, 2, -1, '2017-06-01');

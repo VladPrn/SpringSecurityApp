@@ -15,5 +15,7 @@ public interface BookDao extends JpaRepository<Book, Long> {
 
     List<Book> findByNameContainingIgnoreCaseOrderByNameAsc(String str, Pageable pr);
 
+    List<Book> findByAuthorContainingIgnoreCaseOrderByNameAsc(String str, Pageable pr);
+
     long countByNameContainingIgnoreCase(String str);
 }

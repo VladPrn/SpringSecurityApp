@@ -1,16 +1,12 @@
 package net.proselyte.springsecurityapp.service;
 
-import net.proselyte.springsecurityapp.dao.RoleDao;
 import net.proselyte.springsecurityapp.dao.UserDao;
-import net.proselyte.springsecurityapp.model.Role;
 import net.proselyte.springsecurityapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Implementation of {@link UserService} interface.
@@ -22,9 +18,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-
-    @Autowired
-    private RoleDao roleDao;
 
     @Override
     public void save(User user) {
