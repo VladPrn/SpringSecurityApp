@@ -81,6 +81,8 @@ CREATE TABLE comments (
 )
   ENGINE = InnoDB;
 
+CREATE VIEW gg AS (SELECT user_id, MAX(id) id FROM history GROUP BY user_id, book_id);
+
 CREATE VIEW users_books_balance AS
   SELECT ubb1.* FROM history ubb1
     JOIN (SELECT user_id, MAX(id) id FROM history GROUP BY user_id, book_id) ubb2
