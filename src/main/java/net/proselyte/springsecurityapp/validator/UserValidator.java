@@ -47,6 +47,10 @@ public class UserValidator {
             if (userService.findByUsername(user.getEmail()) != null) {
                 errors.rejectValue("email", "Duplicate.userForm.email");
             }
+
+            if (!user.getUsername().matches("[a-zA-Z0-9]*")) {
+                errors.rejectValue("username", "Unacceptable.Symbols");
+            }
         }
 
 
