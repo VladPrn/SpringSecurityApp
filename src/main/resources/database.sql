@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS history;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS users;
 DROP TABLE  IF EXISTS books;
+DROP VIEW IF EXISTS ubb1;
+
 
 -- Table: users
 CREATE TABLE users (
@@ -81,12 +83,10 @@ CREATE TABLE comments (
 )
   ENGINE = InnoDB;
 
-CREATE VIEW gg AS (SELECT user_id, MAX(id) id FROM history GROUP BY user_id, book_id);
+CREATE VIEW ubb1 AS SELECT user_id, MAX(id) id FROM history GROUP BY user_id, book_id;
 
 CREATE VIEW users_books_balance AS
-  SELECT ubb1.* FROM history ubb1
-    JOIN (SELECT user_id, MAX(id) id FROM history GROUP BY user_id, book_id) ubb2
-      ON ubb1.user_id = ubb2.user_id AND ubb1.id = ubb2.id;
+  SELECT ubb1.* FROM history ubb1 JOIN ubb1 ubb2 ON ubb1.user_id = ubb2.user_id AND ubb1.id = ubb2.id;
 
 -- Insert data
 
