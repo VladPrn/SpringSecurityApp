@@ -115,29 +115,9 @@
           <version>2.5</version>
       </dependency>
   </dependencies>
+
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.3</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals><goal>copy</goal></goals>
-            <configuration>
-              <artifacItems>
-                <artifacItem>
-                  <groupId>com.github.jsimone</groupId>
-                  <artifacId>webapp-runner</artifacId>
-                  <version>8.0.30.2</version>
-                  <destFilename>webapp-runner.jar</destFilename>
-                </artifacItem>
-              </artifacItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
+    <finalName>SpringSecurityApp</finalName>
+
   </build>
 </project>
