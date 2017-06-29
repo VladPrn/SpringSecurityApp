@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT SpringSecurityApp.wsgi:application
+web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
