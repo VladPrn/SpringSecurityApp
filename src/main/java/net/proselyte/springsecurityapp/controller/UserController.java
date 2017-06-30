@@ -288,6 +288,7 @@ public class UserController {
         return "redirect:/admin";
     }
 
+
     @RequestMapping(value = "/personal", method = RequestMethod.POST)
     public String personal(Model model,  HttpServletRequest request, HttpServletResponse response,
                            @RequestParam(value = "removeBookId", required=false) Long removeBookId,

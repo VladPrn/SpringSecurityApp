@@ -5,7 +5,7 @@
   <artifactId>SpringSecurityApp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>SpringSecurityApp Maven Webapp</name>
+  <name>SpringSecurityApp</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -21,6 +21,7 @@
     <logback.version>1.1.3</logback.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <tomcat.version>8.0.28</tomcat.version>
   </properties>
 
   <dependencies>
@@ -52,6 +53,23 @@
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
       <version>${spring-security.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
+      <version>${tomcat.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-logging-juli</artifactId>
+      <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+      <version>${tomcat.version}</version>
     </dependency>
 
     <dependency>
@@ -98,6 +116,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.heroku.sdk</groupId>
+      <artifactId>heroku-maven-plugin</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+
+    <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
       <version>1.3.3</version>
@@ -115,7 +139,58 @@
           <version>2.5</version>
       </dependency>
   </dependencies>
+
   <build>
     <finalName>SpringSecurityApp</finalName>
+    <plugins>
+      <plugin>
+            <groupId>com.heroku.sdk</groupId>
+            <artifactId>heroku-maven-plugin</artifactId>
+            <version>1.1.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals><goal>copy</goal></goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.github.jsimone</groupId>
+                  <artifactId>webapp-runner</artifactId>
+                  <version>8.5.11.3</version>
+                  <destFileName>webapp-runner.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals><goal>copy-dependencies</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <warSourceDirectory>src/main/webapp</warSourceDirectory>
+          <warName>SpringSecurityApp</warName>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
